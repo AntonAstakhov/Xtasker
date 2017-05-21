@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="/Users/Anton/AndroidStudioProjects/Xtasker/app/libs/swipeactionadapter-2.0.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="844fce5dc8725c8569b5fe9c92873beebb2fb4b3">
+        <dex dex="/Users/Anton/AndroidStudioProjects/Xtasker/app/build/intermediates/pre-dexed/debug/swipeactionadapter-2.0.0_0101a5a73344cb6bb24b612845af6cccb93f89a8.jar" />
+    </item>
+
+</items>
