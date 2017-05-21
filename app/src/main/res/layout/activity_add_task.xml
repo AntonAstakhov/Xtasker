@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.widget.RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="io.excitinglab.xtasker.AddTaskActivity">
+
+    <EditText
+        android:id="@+id/editTaskName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="25dp"
+        android:ems="10"
+        android:hint="To Do"
+        android:inputType="text|textAutoCorrect|textAutoComplete|textCapSentences"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/editDueDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/editTaskName"
+        android:layout_alignLeft="@+id/editTaskName"
+        android:layout_alignRight="@+id/editTaskName"
+        android:layout_alignStart="@+id/editTaskName"
+        android:layout_below="@+id/editTaskName"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="50dp"
+        android:ems="10"
+        android:hint="Due Date"
+        android:inputType="none"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/editReminder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/editDueDate"
+        android:layout_alignLeft="@+id/editDueDate"
+        android:layout_alignRight="@+id/editDueDate"
+        android:layout_alignStart="@+id/editDueDate"
+        android:layout_below="@+id/editDueDate"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:hint="Reminder"
+        android:inputType="none"
+        android:textSize="18sp" />
+
+
+    <!--<EditText-->
+        <!--android:id="@+id/editNotes"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginTop="12dp"-->
+        <!--android:hint="Notes"-->
+        <!--android:inputType="text|textAutoCorrect|textAutoComplete|textMultiLine|textImeMultiLine|textCapSentences"-->
+        <!--android:scrollbars="vertical"-->
+        <!--android:layout_alignStart="@+id/spinner1"-->
+        <!--android:layout_alignEnd="@+id/spinner1"-->
+        <!--android:layout_below="@+id/spinner1"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_alignLeft="@+id/spinner1"-->
+        <!--android:layout_alignRight="@+id/spinner1" />-->
+
+
+
+    <ImageButton
+        android:id="@+id/deleteDue"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        app:srcCompat="@android:drawable/ic_delete"
+        android:layout_below="@+id/editTaskName"
+        android:layout_alignRight="@+id/editTaskName"
+        android:layout_alignEnd="@+id/editTaskName"
+        android:layout_marginTop="11dp" />
+
+    <ImageButton
+        android:id="@+id/deleteRem"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        app:srcCompat="@android:drawable/ic_delete"
+        android:layout_below="@+id/deleteDue"
+        android:layout_alignLeft="@+id/deleteDue"
+        android:layout_alignStart="@+id/deleteDue" />
+
+
+    <Spinner
+        android:id="@+id/spinner1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:spinnerMode="dropdown"
+
+
+        android:layout_alignTop="@+id/btnAdd"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="12dp"
+        android:layout_toLeftOf="@+id/btnAdd"
+        android:layout_toStartOf="@+id/btnAdd" />
+
+
+    <Button
+        android:id="@+id/btnAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+
+</android.widget.RelativeLayout>
