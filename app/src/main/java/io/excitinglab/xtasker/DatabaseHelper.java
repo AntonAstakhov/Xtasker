@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.os.Build;
 import android.util.Log;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -45,7 +46,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String TABLE_TASKS = "tasks";
     private static final String TABLE_LISTS = "lists";
-//    private static final String TABLE_SUBTASKS = "subtasks";
+    private static final String TABLE_SUBTASKS = "subtasks";
 
     private static final String LIST_ID = "id";
     private static final String LIST_NAME = "name";
@@ -60,10 +61,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String TASK_NOTE = "note";
     private static final String TASK_P_ID = "p_id";
 
-//    private static final String SUBTASK_ID = "id";
-//    private static final String SUBTASK_NAME = "name";
-//    private static final String SUBTASK_STATUS = "status";
-//    private static final String SUBTASK_P_ID = "p_id";
+    private static final String SUBTASK_ID = "id";
+    private static final String SUBTASK_NAME = "name";
+    private static final String SUBTASK_STATUS = "status";
+    private static final String SUBTASK_P_ID = "p_id";
 
     private static final String CREATE_TABLE_TASKS = "CREATE TABLE "
             + TABLE_TASKS + "(" + TASK_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
@@ -76,10 +77,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + "(" + LIST_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + LIST_NAME + " TEXT, " +
             LIST_SORT + " INTEGER)";
 
-//    private static final String CREATE_TABLE_SUBTASKS = "CREATE TABLE "
-//            + TABLE_SUBTASKS + "(" + SUBTASK_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-//            + SUBTASK_STATUS + " INTEGER," + SUBTASK_NAME + " TEXT, "
-//            + SUBTASK_P_ID + " INTEGER)";
+    private static final String CREATE_TABLE_SUBTASKS = "CREATE TABLE "
+            + TABLE_SUBTASKS + "(" + SUBTASK_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + SUBTASK_STATUS + " INTEGER, " + SUBTASK_NAME + " TEXT, "
+            + SUBTASK_P_ID + " INTEGER)";
 
     private Context context;
     private DatabaseHelper(Context context) {
@@ -91,13 +92,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_TABLE_TASKS);
         db.execSQL(CREATE_TABLE_LISTS);
+        db.execSQL(CREATE_TABLE_SUBTASKS);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_TASKS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_LISTS);
-//        db.execSQL("DROP TABLE IF EXISTS " + TABLE_SUBTASKS);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_SUBTASKS);
 
         onCreate(db);
     }
@@ -941,12 +943,53 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public int updateTask(Task task) {
 
-        if (task.getReminder() != 0) {
+
+
+        Log.e ("VERY NEW: ", String.valueOf(task.getId()));
+
+
+        long reminderOld = getTask((int) task.getId()).getReminder();
+        long reminderNew = task.getReminder();
+
+//        Log.e("BEFORE REM: ", String.valueOf(reminderOld));
+//        Log.e("AFTER REM: ", String.valueOf(reminderNew));
+
+        if (reminderOld == reminderNew) {
+            // do nothing
+        }
+        else if (reminderOld != 0) {
+            // cancel old alarm
             AlarmManager mgr = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-            Intent stopIntent = new Intent(AddTaskActivity.getActivityOneContext(), Alarm.class);
-            PendingIntent stopPI = PendingIntent.getBroadcast(AddTaskActivity.getActivityOneContext(), (int) task.getId(), stopIntent, 0);
+            Intent stopIntent = new Intent(MainActivity.getAppContext(), Alarm.class);
+            PendingIntent stopPI = PendingIntent.getBroadcast(MainActivity.getAppContext(), (int) task.getId(), stopIntent, 0);
             mgr.cancel(stopPI);
         }
+
+        if (reminderNew != 0) {
+            // add new alarm
+            Intent intent2 = new Intent(context, Alarm.class);
+            intent2.putExtra("Title", task.getName());
+            intent2.putExtra("List", task.getP_id());
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(context, (int) task.getId(), intent2, PendingIntent.FLAG_UPDATE_CURRENT);
+
+            AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+
+            if (Build.VERSION.SDK_INT < 19) {
+                am.set(AlarmManager.RTC_WAKEUP, reminderNew, pendingIntent);
+            } else {
+                am.setExact(AlarmManager.RTC_WAKEUP, reminderNew, pendingIntent);
+            }
+        }
+
+
+//        if (task.getReminder() != 0) {
+////            Log.e ("REMINDER: ", String.valueOf(task.getReminder()));
+//            AlarmManager mgr = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+//            Intent stopIntent = new Intent(MainActivity.getAppContext(), Alarm.class);
+//            PendingIntent stopPI = PendingIntent.getBroadcast(MainActivity.getAppContext(), (int) task.getId(), stopIntent, 0);
+//            mgr.cancel(stopPI);
+//        }
+
 
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -960,6 +1003,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(TASK_NOTE, task.getNote());
         values.put(TASK_P_ID, task.getP_id());
 
+//        Log.e("OLD: ", String.valueOf(getTask((int) task.getId())));
+//        Log.e("NEW: ", String.valueOf(task.getReminder()));
+
 
         int i = db.update(TABLE_TASKS, values, TASK_ID + " = ?",
                 new String[] { String.valueOf(task.getId()) });
@@ -969,12 +1015,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return i;
     }
 
+    private void deleteReminder(Task task) {
+        if (task.getReminder() != 0) {
+//            Log.e ("REMINDER: ", String.valueOf(task.getReminder()));
+            AlarmManager mgr = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+            Intent stopIntent = new Intent(MainActivity.getAppContext(), Alarm.class);
+            PendingIntent stopPI = PendingIntent.getBroadcast(MainActivity.getAppContext(), (int) task.getId(), stopIntent, 0);
+            mgr.cancel(stopPI);
+        }
+    }
+
     public int completeTask(Task task) {
 
         if (task.getReminder() != 0) {
             AlarmManager mgr = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-            Intent stopIntent = new Intent(AddTaskActivity.getActivityOneContext(), Alarm.class);
-            PendingIntent stopPI = PendingIntent.getBroadcast(AddTaskActivity.getActivityOneContext(), (int) task.getId(), stopIntent, 0);
+            Intent stopIntent = new Intent(MainActivity.getAppContext(), Alarm.class);
+            PendingIntent stopPI = PendingIntent.getBroadcast(MainActivity.getAppContext(), (int) task.getId(), stopIntent, 0);
             mgr.cancel(stopPI);
         }
 
@@ -1025,10 +1081,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public void deleteTask(long task_id) {
 
-        AlarmManager mgr = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        Intent stopIntent = new Intent(AddTaskActivity.getActivityOneContext(), Alarm.class);
-        PendingIntent stopPI = PendingIntent.getBroadcast(AddTaskActivity.getActivityOneContext(), (int) task_id, stopIntent, 0);
-        mgr.cancel(stopPI);
+        if (getTask((int) task_id).getReminder() != 0) {
+            AlarmManager mgr = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+            Intent stopIntent = new Intent(MainActivity.getAppContext(), Alarm.class);
+            PendingIntent stopPI = PendingIntent.getBroadcast(MainActivity.getAppContext(), (int) task_id, stopIntent, 0);
+            mgr.cancel(stopPI);
+        }
 
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_TASKS, TASK_ID + " = ?",

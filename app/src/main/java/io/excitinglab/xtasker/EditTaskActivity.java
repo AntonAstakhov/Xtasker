@@ -319,26 +319,28 @@ public class EditTaskActivity extends AppCompatActivity implements DatePickerDia
         task.setNote(s);
         task.setP_id(i);
 
+        Log.e("BEFORE: ", String.valueOf(taskID));
+
         insertData = mDatabaseHelper.updateTask(task);
 
-        TaskName = task.getName();
-        ID = (int) insertData;
+//        TaskName = task.getName();
+//        ID = (int) insertData;
 
 
-        if (reminderTime != 0) {
-            Intent intent2 = new Intent(this, Alarm.class);
-            intent2.putExtra("Title", TaskName);
-            intent2.putExtra("List", selectedList);
-            PendingIntent pendingIntent = PendingIntent.getBroadcast(this, ID, intent2, PendingIntent.FLAG_UPDATE_CURRENT);
-
-            AlarmManager am = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
-
-            if (Build.VERSION.SDK_INT < 19) {
-                am.set(AlarmManager.RTC_WAKEUP, reminderTime, pendingIntent);
-            } else {
-                am.setExact(AlarmManager.RTC_WAKEUP, reminderTime, pendingIntent);
-            }
-        }
+//        if (reminderTime != 0) {
+//            Intent intent2 = new Intent(this, Alarm.class);
+//            intent2.putExtra("Title", TaskName);
+//            intent2.putExtra("List", selectedList);
+//            PendingIntent pendingIntent = PendingIntent.getBroadcast(this, ID, intent2, PendingIntent.FLAG_UPDATE_CURRENT);
+//
+//            AlarmManager am = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
+//
+//            if (Build.VERSION.SDK_INT < 19) {
+//                am.set(AlarmManager.RTC_WAKEUP, reminderTime, pendingIntent);
+//            } else {
+//                am.setExact(AlarmManager.RTC_WAKEUP, reminderTime, pendingIntent);
+//            }
+//        }
 
 
         if (insertData == -1) {
@@ -392,6 +394,17 @@ public class EditTaskActivity extends AppCompatActivity implements DatePickerDia
         SimpleDateFormat sdf1=new SimpleDateFormat("dd.MM.yyyy HH:mm");
         timeString = sdf1.format(datetime);
         btnRem.setText(timeString);
+
+
+        Date nowDate = new Date (new java.util.Date().getTime());
+        datetime = new Date (reminderTime);
+        if (reminderTime != 0){
+            if (datetime.before(nowDate)) {
+                toastMessage("Reminder: wrong time!");
+                reminderTime = 0;
+                btnRem.setText("");
+            }
+        }
     }
 
     @Override

@@ -404,6 +404,19 @@ public class AddTaskActivity extends AppCompatActivity  implements DatePickerDia
 
 
 
+
+        Date nowDate = new Date (new java.util.Date().getTime());
+        datetime = new Date (reminderTime);
+        if (reminderTime != 0){
+            if (datetime.before(nowDate)) {
+                toastMessage("Reminder: wrong time!");
+                reminderTime = 0;
+                btnRem.setText("");
+            }
+        }
+
+
+
 //        handleNotification(reminderTime);
 
 

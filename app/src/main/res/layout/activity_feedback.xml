@@ -14,17 +14,17 @@
         android:text="Tell us about your issue"
         android:layout_marginTop="33dp"
         android:layout_alignParentTop="true"
-        android:layout_alignLeft="@+id/editText2"
-        android:layout_alignStart="@+id/editText2" />
+        android:layout_alignLeft="@+id/textIssue"
+        android:layout_alignStart="@+id/textIssue" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/textIssue"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
         android:ems="10"
         android:hint="Issue"
-        android:inputType="text|textAutoCorrect|textAutoComplete"
+        android:inputType="text|textAutoCorrect|textAutoComplete|textCapSentences"
         android:textSize="18sp"
         app:layout_constraintVertical_bias="0.0"
         android:layout_alignTop="@+id/textView7"
@@ -33,20 +33,20 @@
 
 
     <EditText
-        android:id="@+id/editText3"
+        android:id="@+id/textNotes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Notes"
-        android:inputType="text|textAutoCorrect|textAutoComplete|textMultiLine|textImeMultiLine"
+        android:inputType="text|textAutoCorrect|textAutoComplete|textMultiLine|textImeMultiLine|textCapSentences"
         android:scrollbars="vertical"
-        android:layout_below="@+id/editText2"
+        android:layout_below="@+id/textIssue"
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="56dp"
         android:layout_marginBottom="56dp"
         />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/buttonSendFeedback"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="SEND"

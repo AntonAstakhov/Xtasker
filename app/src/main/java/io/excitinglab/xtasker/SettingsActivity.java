@@ -10,14 +10,17 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
+import android.preference.SwitchPreference;
 import android.support.v7.app.ActionBar;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.preference.RingtonePreference;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.MenuItem;
 
 import java.util.List;
@@ -204,6 +207,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
+
             addPreferencesFromResource(R.xml.pref_notification);
             setHasOptionsMenu(true);
 
@@ -211,7 +215,9 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             // to their values. When their values change, their summaries are
             // updated to reflect the new value, per the Android Design
             // guidelines.
-            bindPreferenceSummaryToValue(findPreference("notifications_new_message_ringtone"));
+
+//            bindPreferenceSummaryToValue(findPreference("notifications_sound"));
+
         }
 
         @Override
@@ -221,6 +227,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                 startActivity(new Intent(getActivity(), SettingsActivity.class));
                 return true;
             }
+
             return super.onOptionsItemSelected(item);
         }
     }

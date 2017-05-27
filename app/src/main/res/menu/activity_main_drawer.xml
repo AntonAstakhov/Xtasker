@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
+
     <group
+
         android:id="@+id/group1"
         android:checkableBehavior="single">
         <item
@@ -45,10 +47,10 @@
             android:id="@+id/nav_rate"
             android:icon="@drawable/ic_grade_black_24dp"
             android:title="Rate" />
-        <item
-            android:id="@+id/nav_share"
-            android:icon="@drawable/ic_menu_share"
-            android:title="Share" />
+        <!--<item-->
+            <!--android:id="@+id/nav_share"-->
+            <!--android:icon="@drawable/ic_menu_share"-->
+            <!--android:title="Share" />-->
         <item
             android:id="@+id/nav_feedback"
             android:icon="@drawable/ic_feedback_black_24dp"

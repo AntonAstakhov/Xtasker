@@ -3,6 +3,7 @@ package io.excitinglab.xtasker;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -72,11 +73,15 @@ public class MainActivity extends AppCompatActivity
 
     private static int SORTLIST = -1;
 
+    private static Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        MainActivity.context = getApplicationContext();
 
         SHOW_COMPLETED = false;
 
@@ -143,6 +148,11 @@ public class MainActivity extends AppCompatActivity
 
     }
 
+    public static Context getAppContext() {
+        return MainActivity.context;
+    }
+
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -183,8 +193,8 @@ public class MainActivity extends AppCompatActivity
 //            Todo: CHANGE URL
 
             item.setCheckable(false);
-//            Uri uri = Uri.parse("market://details?id=" + context.getPackageName());
-            Uri uri = Uri.parse("market://details?id=com.wunderkinder.wunderlistandroid");
+            Uri uri = Uri.parse("market://details?id=" + context.getPackageName());
+//            Uri uri = Uri.parse("market://details?id=com.wunderkinder.wunderlistandroid");
             Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
             goToMarket.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY |
                     Intent.FLAG_ACTIVITY_NEW_DOCUMENT |
@@ -193,13 +203,13 @@ public class MainActivity extends AppCompatActivity
                 startActivity(goToMarket);
             } catch (ActivityNotFoundException e) {
                 startActivity(new Intent(Intent.ACTION_VIEW,
-//                        Uri.parse("http://play.google.com/store/apps/details?id=" + context.getPackageName())));
-                        Uri.parse("http://play.google.com/store/apps/details?id=com.wunderkinder.wunderlistandroid")));
+                        Uri.parse("http://play.google.com/store/apps/details?id=" + context.getPackageName())));
+//                        Uri.parse("http://play.google.com/store/apps/details?id=com.wunderkinder.wunderlistandroid")));
             }
-        } else if (id == R.id.nav_share) {
-            item.setCheckable(false);
-            intent = new Intent(this, ShareActivity.class);
-            startActivity(intent);
+//        } else if (id == R.id.nav_share) {
+//            item.setCheckable(false);
+//            intent = new Intent(this, ShareActivity.class);
+//            startActivity(intent);
         } else if (id == R.id.nav_feedback) {
             item.setCheckable(false);
             intent = new Intent(this, FeedbackActivity.class);
@@ -244,7 +254,14 @@ public class MainActivity extends AppCompatActivity
         final Menu menu = navigationView.getMenu();
 
         for (int i = 0; i < lists.size(); i++) {
-            menu.add(R.id.group2,Menu.NONE,4,lists.get(i).getName()).setIcon(R.drawable.ic_list_black_24dp);
+            String s = lists.get(i).getName();
+
+//            if (s.length() > 24) {
+//                s = s.substring(0, 22);
+//                s = s + "...";
+//            }
+
+            menu.add(R.id.group2,Menu.NONE,4,s).setIcon(R.drawable.ic_list_black_24dp);
         }
 
 //        for (int i = 0, count = navigationView.getChildCount(); i < count; i++) {
@@ -413,9 +430,9 @@ public class MainActivity extends AppCompatActivity
                     .show();
         }
 
-        else if (id == R.id.action_edit) {
-
-        }
+//        else if (id == R.id.action_edit) {
+//
+//        }
 
         else if (id == R.id.action_sort) {
 
@@ -515,7 +532,7 @@ public class MainActivity extends AppCompatActivity
                 navItemIndex = 3;
                 current_list_id = mDatabaseHelper.getList(result).getId();
 
-                selectedMenuItemId = menu.size()-5;
+                selectedMenuItemId = menu.size()-4;
 
             }
             if (resultCode == Activity.RESULT_CANCELED) {

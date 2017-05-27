@@ -9,7 +9,12 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.PowerManager;
+import android.preference.PreferenceManager;
 import android.provider.ContactsContract;
 import android.provider.Settings;
 import android.support.v4.app.NotificationCompat;
@@ -68,16 +73,24 @@ public class Alarm extends BroadcastReceiver {
                 new NotificationCompat.Builder(context)
                         .setSmallIcon(R.drawable.ic_alarm_black_18dp)
                         .setContentTitle(mDatabaseHelper.getTask(ID).getName())
-                        .setDefaults(Notification.DEFAULT_ALL)
                         .setPriority(Notification.PRIORITY_HIGH)
                         .setAutoCancel(true)
                         .setContentText(list);
 
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        boolean t = sharedPreferences.getBoolean("notifications_sound", true);
 
+        if (t) {
+            Uri uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+            mBuilder.setSound(uri);
+            mBuilder.setDefaults(Notification.DEFAULT_ALL);
+        }
+        else {
+            mBuilder.setDefaults(0);
+        }
 
         Intent resultIntent = new Intent(context, EditTaskActivity.class);
         resultIntent.putExtra("id", ID);
-        Log.e("Alarm: ", String.valueOf(ID));
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
         stackBuilder.addParentStack(EditTaskActivity.class);
         stackBuilder.addNextIntent(resultIntent);
@@ -158,8 +171,5 @@ public class Alarm extends BroadcastReceiver {
         alarmManager.cancel(sender);
     }
 
-
-
-
-
 }
+
