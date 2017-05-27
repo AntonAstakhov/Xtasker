@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -71,17 +72,13 @@ public class ListViewFragment extends Fragment {
     public void onStart(){
         super.onStart();
 
-//        Log.e("SORTLIST", String.valueOf(SORTLIST));
-
         mDatabaseHelper = mDatabaseHelper.getInstance(getActivity());
         mListView = (ListView) getActivity().findViewById(R.id.listView);
 
         Lists list = mDatabaseHelper.getListByID(selectedID);
         final ArrayList<Task> tasks = new ArrayList<>();
 
-//        tasks.addAll(mDatabaseHelper.getActiveTasks(list));
-        Log.e("SORT: ", String.valueOf(list.getSort()));
-        Log.e("SORTLIST", String.valueOf(SORTLIST));
+
         if (SORTLIST == -1) {
             SORTLIST = list.getSort();
             tasks.addAll(mDatabaseHelper.getActiveTasksNoSort(list, SORTLIST));
@@ -89,6 +86,8 @@ public class ListViewFragment extends Fragment {
         else {
             tasks.addAll(mDatabaseHelper.getActiveTasks(list, SORTLIST));
         }
+
+        SORTLIST = -1;
 
         s = tasks.size();
 
