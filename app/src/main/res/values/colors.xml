@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!--<color name="colorPrimary">#3F51B5</color>-->
-    <!--<color name="colorPrimaryDark">#303F9F</color>-->
-    <!--<color name="colorAccent">#FF4081</color>-->
+
 
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
@@ -25,6 +23,45 @@
     <color name="dot_light_screen2">#73d9be</color>
     <color name="dot_light_screen3">#ec7d7d</color>
     <color name="dot_light_screen4">#f7be72</color>
+
+
+    <!--&lt;!&ndash;<color name="mcolorPrimary">#b2dfdb</color>&ndash;&gt;-->
+    <!--<color name="mcolorAccent">#ff6d00</color>-->
+    <!--<color name="mcolorPrimaryDark">#82ada9</color>-->
+
+    <!--<color name="mcolorHightlightPrimary">#64b2dfdb</color>-->
+    <!--<color name="mcolorHighlightOrange">#64ff6d00</color>-->
+    <!--<color name="mcolorHighlightDarkPrimary">#6482ada9</color>-->
+    <!--<color name="red_accent300">#ff5252</color>-->
+    <!--<color name="red_accent200">#ff5252</color>-->
+
+    <!--<color name="mcolorPrimary">#b2dfdb</color>-->
+
+
+    <!--<color name="mcolorPrimary">#6975bd</color>-->
+    <!--<color name="mcolorAccent">#ffc22a</color>-->
+    <!--<color name="mcolorPrimaryDark">#474f7f</color>-->
+
+    <!--<color name="mcolorPrimary">#aebfbe</color>-->
+    <!--<color name="mcolorAccent">#ff6e40</color>-->
+    <!--<color name="mcolorPrimaryDark">#7d8887</color>-->
+
+
+
+    <color name="mcolorPrimary">#4e7afb</color>
+    <color name="mcolorAccent">#4e7afb</color>
+    <color name="mcolorPrimaryDark">#4e7afb</color>
+
+    <color name="mcolorHightlightPrimary">#8e4e7afb</color>
+    <color name="mcolorHighlightAccent">#8e4e7afb</color>
+    <color name="mcolorHighlightDarkPrimary">#8e4e7afb</color>
+    <color name="red_accent300">#ff5252</color>
+    <color name="red_accent200">#ff5252</color>
+    <color name="myGray">#5b5b5b</color>
+    <color name="myGreen">#22ce22</color>
+    <color name="mcolorHighlightAccentNotTransparent">#90acff</color>
+
+
 
     <array name="array_dot_active">
         <item>@color/dot_light_screen1</item>
