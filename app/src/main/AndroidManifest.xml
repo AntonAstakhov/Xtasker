@@ -79,7 +79,7 @@
         <activity
             android:name=".HelpActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/MyTheme_NoActionBar"/>
 
         <receiver android:name=".Alarm"/>
 

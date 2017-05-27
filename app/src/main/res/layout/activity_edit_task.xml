@@ -12,9 +12,9 @@
     tools:context="io.excitinglab.xtasker.AddTaskActivity">
 
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <!--<ScrollView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent">-->
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -139,7 +139,8 @@
                 android:tint="@color/mcolorPrimary"
                 app:srcCompat="@drawable/ic_clear_black_24px" />
         </RelativeLayout>
-    </ScrollView>
+
+    <!--</ScrollView>-->
 
 
     <!--<Spinner-->

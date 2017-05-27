@@ -945,7 +945,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
 
-        Log.e ("VERY NEW: ", String.valueOf(task.getId()));
+//        Log.e ("VERY NEW: ", String.valueOf(task.getId()));
 
 
         long reminderOld = getTask((int) task.getId()).getReminder();
@@ -1015,15 +1015,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return i;
     }
 
-    private void deleteReminder(Task task) {
-        if (task.getReminder() != 0) {
-//            Log.e ("REMINDER: ", String.valueOf(task.getReminder()));
-            AlarmManager mgr = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-            Intent stopIntent = new Intent(MainActivity.getAppContext(), Alarm.class);
-            PendingIntent stopPI = PendingIntent.getBroadcast(MainActivity.getAppContext(), (int) task.getId(), stopIntent, 0);
-            mgr.cancel(stopPI);
-        }
-    }
+//    private void deleteReminder(Task task) {
+//        if (task.getReminder() != 0) {
+////            Log.e ("REMINDER: ", String.valueOf(task.getReminder()));
+//            AlarmManager mgr = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+//            Intent stopIntent = new Intent(MainActivity.getAppContext(), Alarm.class);
+//            PendingIntent stopPI = PendingIntent.getBroadcast(MainActivity.getAppContext(), (int) task.getId(), stopIntent, 0);
+//            mgr.cancel(stopPI);
+//        }
+//    }
 
     public int completeTask(Task task) {
 

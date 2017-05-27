@@ -298,7 +298,7 @@ public class EditTaskActivity extends AppCompatActivity implements DatePickerDia
         task.setNote(s);
         task.setP_id(i);
 
-        Log.e("BEFORE: ", String.valueOf(taskID));
+//        Log.e("BEFORE: ", String.valueOf(taskID));
 
         insertData = mDatabaseHelper.updateTask(task);
 
