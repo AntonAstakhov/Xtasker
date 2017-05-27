@@ -89,32 +89,32 @@ public class MyAdapterToday extends BaseAdapter {
         TextView text2 = (TextView) vi.findViewById(R.id.tv_list);
         TextView text3 = (TextView) vi.findViewById(R.id.tv_date);
         ImageView img1=(ImageView) vi.findViewById(R.id.img_date);
-        CheckBox ch=(CheckBox) vi.findViewById(R.id.checkBox);
+//        CheckBox ch=(CheckBox) vi.findViewById(R.id.checkBox);
 
         text1.setText(tasks.get(position).getName());
 
-        ch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
-                    //TODO set status to 1
-                    text1.setPaintFlags(text1.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-                }
-                else{
-                    //TODO set status to 0
-                    text1.setPaintFlags(0);
-                }
-            }
-        });
+//        ch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                if(isChecked){
+//                    //TODO set status to 1
+//                    text1.setPaintFlags(text1.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+//                }
+//                else{
+//                    //TODO set status to 0
+//                    text1.setPaintFlags(0);
+//                }
+//            }
+//        });
 
 
 
         if (tasks.get(position).getStatus() == 1) {
-            ch.setChecked(true);
+//            ch.setChecked(true);
             text1.setPaintFlags(text1.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
         }
         else {
-            ch.setChecked(false);
+//            ch.setChecked(false);
             text1.setPaintFlags(0);
         }
 

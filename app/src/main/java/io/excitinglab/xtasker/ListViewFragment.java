@@ -80,10 +80,11 @@ public class ListViewFragment extends Fragment {
         final ArrayList<Task> tasks = new ArrayList<>();
 
 //        tasks.addAll(mDatabaseHelper.getActiveTasks(list));
+        Log.e("SORT: ", String.valueOf(list.getSort()));
+        Log.e("SORTLIST", String.valueOf(SORTLIST));
         if (SORTLIST == -1) {
             SORTLIST = list.getSort();
             tasks.addAll(mDatabaseHelper.getActiveTasksNoSort(list, SORTLIST));
-
         }
         else {
             tasks.addAll(mDatabaseHelper.getActiveTasks(list, SORTLIST));
@@ -167,7 +168,6 @@ public class ListViewFragment extends Fragment {
                                 mDatabaseHelper.completeTask(tasks.get(position));
                                 tasks.remove(position);
                                 onStart();
-
                             }
                         }
                         else {

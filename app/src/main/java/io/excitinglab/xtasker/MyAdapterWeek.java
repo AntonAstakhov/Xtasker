@@ -87,7 +87,7 @@ public class MyAdapterWeek extends BaseAdapter {
 //        TextView text4 = (TextView) vi.findViewById(R.id.tv_notif);
         ImageView img1=(ImageView) vi.findViewById(R.id.img_date);
 //        ImageView img2=(ImageView) vi.findViewById(R.id.img_notif);
-        CheckBox ch=(CheckBox) vi.findViewById(R.id.checkBox);
+//        CheckBox ch=(CheckBox) vi.findViewById(R.id.checkBox);
 
 
         text1.setText(tasks.get(position).getName());

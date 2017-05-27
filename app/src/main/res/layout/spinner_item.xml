@@ -8,6 +8,9 @@
     android:layout_gravity="center_vertical"
     android:gravity="center_vertical"
 
+    android:maxLines="1"
+    android:maxLength="25"
+
     android:hint="Select a list"
     android:paddingBottom="10dp"
     android:paddingEnd="10dp"

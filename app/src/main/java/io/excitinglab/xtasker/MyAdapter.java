@@ -41,9 +41,9 @@ public class MyAdapter extends BaseAdapter {
         this.tasks = tasks;
         inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        checkedState=new ArrayList<>(tasks.size());
-        for(int i=0; i<tasks.size();i++)
-            checkedState.add(false);
+//        checkedState=new ArrayList<>(tasks.size());
+//        for(int i=0; i<tasks.size();i++)
+//            checkedState.add(false);
     }
 
 
@@ -95,30 +95,30 @@ public class MyAdapter extends BaseAdapter {
         ImageView img1=(ImageView) vi.findViewById(R.id.img_date);
 //        ImageView img2=(ImageView) vi.findViewById(R.id.img_notif);
 //        ImageView img3=(ImageView) vi.findViewById(R.id.img_attention);
-        CheckBox ch=(CheckBox) vi.findViewById(R.id.checkBox);
+//        CheckBox ch=(CheckBox) vi.findViewById(R.id.checkBox);
         text1.setText(tasks.get(position).getName());
 
-        ch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
-                    //TODOset status to 1
-                    text1.setPaintFlags(text1.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-                }
-                else{
-                    //set status to 0
-                    text1.setPaintFlags(0);
-                }
-            }
-        });
+//        ch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                if(isChecked){
+//                    //TODOset status to 1
+//                    text1.setPaintFlags(text1.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+//                }
+//                else{
+//                    //set status to 0
+//                    text1.setPaintFlags(0);
+//                }
+//            }
+//        });
 
 
         if (tasks.get(position).getStatus() == 1) {
-            ch.setChecked(true);
+//            ch.setChecked(true);
             text1.setPaintFlags(text1.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
         }
         else {
-            ch.setChecked(false);
+//            ch.setChecked(false);
 //            img3.setVisibility(View.VISIBLE);
             text1.setPaintFlags(0);
         }
@@ -141,8 +141,8 @@ public class MyAdapter extends BaseAdapter {
         String timeString="";
         if (tasks.get(position).getDeadline()!=NULL) {
             Date datetime=new Date(tasks.get(position).getDeadline());
-//            SimpleDateFormat sdf1=new SimpleDateFormat("EEE, d MMM");
-            SimpleDateFormat sdf1=new SimpleDateFormat("EEE");
+            SimpleDateFormat sdf1=new SimpleDateFormat("EEE, d MMM");
+//            SimpleDateFormat sdf1=new SimpleDateFormat("EEE");
             dateString=sdf1.format(datetime);
 
             img1.setVisibility(View.VISIBLE);
