@@ -19,38 +19,55 @@
         android:ems="10"
         android:hint="To Do"
         android:inputType="text|textAutoCorrect|textAutoComplete|textCapSentences"
-        android:textSize="24sp" />
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/editDueDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/editTaskName"
         android:layout_alignLeft="@+id/editTaskName"
-        android:layout_alignRight="@+id/editTaskName"
         android:layout_alignStart="@+id/editTaskName"
         android:layout_below="@+id/editTaskName"
+        android:layout_marginEnd="20dp"
         android:layout_marginTop="20dp"
-        android:layout_marginRight="50dp"
+        android:layout_toLeftOf="@+id/deleteDue"
+        android:layout_toStartOf="@+id/deleteDue"
         android:ems="10"
         android:hint="Due Date"
         android:inputType="none"
-        android:textSize="18sp" />
+        android:paddingStart="40dp"
+        android:textSize="14sp"
+        android:theme="@style/MyBorderBackgroundStyle" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/editReminder"
+        android:layout_alignLeft="@+id/editDueDate"
+        android:layout_alignStart="@+id/editDueDate"
+        android:layout_alignTop="@+id/editDueDate"
+        android:paddingStart="10dp"
+        android:tint="@drawable/color_selector2"
+        app:srcCompat="@drawable/ic_event_black_24dp" />
 
     <TextView
         android:id="@+id/editReminder"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/editDueDate"
         android:layout_alignLeft="@+id/editDueDate"
-        android:layout_alignRight="@+id/editDueDate"
         android:layout_alignStart="@+id/editDueDate"
         android:layout_below="@+id/editDueDate"
+        android:layout_marginEnd="20dp"
         android:layout_marginTop="20dp"
+        android:layout_toLeftOf="@+id/deleteRem"
+        android:layout_toStartOf="@+id/deleteRem"
         android:ems="10"
         android:hint="Reminder"
         android:inputType="none"
-        android:textSize="18sp" />
+        android:paddingStart="40dp"
+        android:textSize="14sp"
+        android:theme="@style/MyBorderBackgroundStyle" />
 
 
     <!--<EditText-->
@@ -69,50 +86,85 @@
         <!--android:layout_alignRight="@+id/spinner1" />-->
 
 
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/editReminder"
+        android:layout_alignLeft="@+id/imageView2"
+        android:layout_alignStart="@+id/imageView2"
+        android:layout_alignTop="@+id/editReminder"
+        android:backgroundTintMode="src_over"
+        android:paddingStart="10dp"
+        android:tint="@drawable/color_selector2"
+        app:srcCompat="@drawable/ic_alarm_black_24dp" />
 
     <ImageButton
         android:id="@+id/deleteDue"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        app:srcCompat="@android:drawable/ic_delete"
-        android:layout_below="@+id/editTaskName"
-        android:layout_alignRight="@+id/editTaskName"
+        android:layout_above="@+id/editReminder"
         android:layout_alignEnd="@+id/editTaskName"
-        android:layout_marginTop="11dp" />
+        android:layout_alignRight="@+id/editTaskName"
+        android:layout_alignTop="@+id/editDueDate"
+        app:srcCompat="@drawable/ic_clear_black_24px"
+        android:background="@android:color/transparent"
+        android:tint="@color/mcolorPrimary"/>
 
     <ImageButton
         android:id="@+id/deleteRem"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        app:srcCompat="@android:drawable/ic_delete"
-        android:layout_below="@+id/deleteDue"
+        android:layout_alignBottom="@+id/editReminder"
         android:layout_alignLeft="@+id/deleteDue"
-        android:layout_alignStart="@+id/deleteDue" />
+        android:layout_alignStart="@+id/deleteDue"
+        android:layout_alignTop="@+id/editReminder"
+        app:srcCompat="@drawable/ic_clear_black_24px"
+        android:background="@android:color/transparent"
+        android:tint="@color/mcolorPrimary"/>
 
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/btnAdd"
+        android:layout_toLeftOf="@+id/spinner1"
+        android:background="?android:attr/colorBackground"
+        android:padding="10dp"
+        android:tint="@drawable/color_selector2"
+        app:srcCompat="@drawable/ic_list_black_24dp" />
 
     <Spinner
         android:id="@+id/spinner1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:spinnerMode="dropdown"
 
-
+        android:layout_alignParentBottom="true"
         android:layout_alignTop="@+id/btnAdd"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="12dp"
-        android:layout_toLeftOf="@+id/btnAdd"
-        android:layout_toStartOf="@+id/btnAdd" />
-
+        android:layout_toRightOf="@+id/imageView3"
+        android:background="?android:attr/colorBackground"
+        android:spinnerMode="dropdown"
+        android:theme="@style/MySpinner"
+        android:layout_alignRight="@+id/editReminder"
+        android:layout_alignEnd="@+id/editReminder" />
 
     <Button
         android:id="@+id/btnAdd"
+
+        style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add"
         android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:background="@color/mcolorPrimaryDark"
+        android:text="Add"
+        android:layout_toRightOf="@+id/spinner1"
+        android:layout_toEndOf="@+id/spinner1" />
 
 
 </android.widget.RelativeLayout>

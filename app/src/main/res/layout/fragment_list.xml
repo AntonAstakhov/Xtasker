@@ -5,18 +5,20 @@
     tools:context="io.excitinglab.xtasker.InboxFragment">
 
     <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:orientation="horizontal" >
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
 
         <ListView
-            android:clipToPadding="false"
-            android:paddingBottom="?android:listPreferredItemHeight"
             android:id="@+id/listView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:clipToPadding="false"
             android:dividerHeight="1dp"
-            android:layout_margin="10dp">
+            android:paddingBottom="?android:listPreferredItemHeight"
+            android:scrollbarStyle="outsideOverlay"
+
+            >
             <!--android:divider="#00000000"-->
         </ListView>
 
