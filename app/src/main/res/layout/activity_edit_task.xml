@@ -1,137 +1,200 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <android.widget.RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="io.excitinglab.xtasker.AddTaskActivity"
-
     android:descendantFocusability="beforeDescendants"
-    android:focusableInTouchMode="true">
 
-    <EditText
+    android:focusableInTouchMode="true"
+    android:isScrollContainer="true"
+    tools:context="io.excitinglab.xtasker.AddTaskActivity">
 
-        android:id="@+id/editTaskName"
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginRight="24dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="25dp"
-        android:ems="10"
-        android:hint="To Do"
-        android:inputType="text|textAutoCorrect|textAutoComplete|textCapSentences"
-        android:textSize="24sp" />
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/editDueDate"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/editTaskName"
-        android:layout_alignLeft="@+id/editTaskName"
-        android:layout_alignRight="@+id/editTaskName"
-        android:layout_alignStart="@+id/editTaskName"
-        android:layout_below="@+id/editTaskName"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="50dp"
-        android:ems="10"
-        android:hint="Due Date"
-        android:inputType="none"
-        android:textSize="18sp" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/editReminder"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/editDueDate"
-        android:layout_alignLeft="@+id/editDueDate"
-        android:layout_alignRight="@+id/editDueDate"
-        android:layout_alignStart="@+id/editDueDate"
-        android:layout_below="@+id/editDueDate"
-        android:layout_marginTop="20dp"
-        android:ems="10"
-        android:hint="Reminder"
-        android:inputType="none"
-        android:textSize="18sp" />
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/editReminder"
+                android:layout_alignLeft="@+id/editReminder"
+                android:layout_alignStart="@+id/editReminder"
+                android:layout_alignTop="@+id/editReminder"
+                android:layout_marginStart="10dp"
+                android:backgroundTintMode="screen"
+                android:tint="@drawable/color_selector2"
+                app:srcCompat="@drawable/ic_alarm_black_24dp" />
 
+            <EditText
+                android:id="@+id/editNotes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@+id/deleteRem"
+                android:layout_alignLeft="@+id/editReminder"
+                android:layout_alignRight="@+id/deleteRem"
+                android:layout_alignStart="@+id/editReminder"
+                android:layout_below="@+id/editReminder"
+                android:layout_marginBottom="50dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/border_background"
+                android:hint="Notes"
+                android:inputType="text|textAutoCorrect|textAutoComplete|textMultiLine|textImeMultiLine|textCapSentences"
+                android:padding="10dp"
+                android:scrollbars="vertical"
+                android:textSize="14sp" />
 
-    <EditText
-        android:id="@+id/editNotes"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:hint="Notes"
-        android:inputType="text|textAutoCorrect|textAutoComplete|textMultiLine|textImeMultiLine|textCapSentences"
-        android:scrollbars="vertical"
-        android:layout_alignStart="@+id/editReminder"
-        android:layout_alignEnd="@+id/deleteRem"
-        android:layout_below="@+id/editReminder"
-        android:layout_marginBottom="56dp"
-        android:layout_centerHorizontal="true"
-        android:layout_alignLeft="@+id/editReminder"
-        android:layout_alignRight="@+id/deleteRem"
-        />
+            <ImageView
+                android:id="@+id/imageView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/editReminder"
+                android:layout_alignLeft="@+id/editDueDate"
+                android:layout_alignStart="@+id/editDueDate"
+                android:layout_alignTop="@+id/editDueDate"
+                android:layout_marginStart="10dp"
+                android:tint="@drawable/color_selector2"
+                app:srcCompat="@drawable/ic_event_black_24dp" />
+
+            <TextView
+                android:id="@+id/editReminder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/editDueDate"
+                android:layout_alignStart="@+id/editDueDate"
+                android:layout_below="@+id/editDueDate"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_toLeftOf="@+id/deleteRem"
+                android:layout_toStartOf="@+id/deleteRem"
+                android:ems="10"
+                android:hint="Reminder"
+                android:inputType="none"
+                android:paddingStart="40dp"
+                android:textSize="14sp"
+                android:theme="@style/MyBorderBackgroundStyle" />
+
+            <ImageButton
+                android:id="@+id/deleteRem"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignBottom="@+id/editReminder"
+                android:layout_alignLeft="@+id/deleteDue"
+                android:layout_alignStart="@+id/deleteDue"
+                android:layout_alignTop="@+id/editReminder"
+                android:background="@android:color/transparent"
+                android:tint="@color/mcolorPrimary"
+                app:srcCompat="@drawable/ic_clear_black_24px" />
+
+            <EditText
+                android:id="@+id/editTaskName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginLeft="24dp"
+                android:layout_marginRight="24dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="25dp"
+                android:ems="10"
+                android:hint="To Do"
+                android:inputType="text|textAutoCorrect|textAutoComplete|textCapSentences"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/editDueDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/editTaskName"
+                android:layout_alignStart="@+id/editTaskName"
+                android:layout_below="@+id/editTaskName"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_toLeftOf="@+id/deleteDue"
+                android:layout_toStartOf="@+id/deleteDue"
+                android:ems="10"
+                android:hint="Due Date"
+                android:inputType="none"
+                android:paddingStart="40dp"
+                android:textSize="14sp"
+                android:theme="@style/MyBorderBackgroundStyle" />
+
+            <ImageButton
+                android:id="@+id/deleteDue"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_above="@+id/editReminder"
+                android:layout_alignEnd="@+id/editTaskName"
+                android:layout_alignRight="@+id/editTaskName"
+                android:layout_alignTop="@+id/editDueDate"
+                android:background="@android:color/transparent"
+                android:tint="@color/mcolorPrimary"
+                app:srcCompat="@drawable/ic_clear_black_24px" />
+        </RelativeLayout>
+    </ScrollView>
+
 
     <!--<Spinner-->
-        <!--android:id="@+id/spinner1"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:spinnerMode="dropdown"-->
-        <!--android:layout_marginTop="20dp"-->
-        <!--android:layout_alignStart="@+id/editReminder"-->
-        <!--android:layout_alignEnd="@+id/editReminder"-->
-        <!--android:layout_below="@+id/editReminder"-->
-        <!--android:layout_alignLeft="@+id/editReminder"-->
-        <!--android:layout_alignRight="@+id/editReminder" />-->
-
-    <ImageButton
-        android:id="@+id/deleteDue"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        app:srcCompat="@android:drawable/ic_delete"
-        android:layout_below="@+id/editTaskName"
-        android:layout_alignRight="@+id/editTaskName"
-        android:layout_alignEnd="@+id/editTaskName"
-        android:layout_marginTop="11dp" />
-
-    <ImageButton
-        android:id="@+id/deleteRem"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        app:srcCompat="@android:drawable/ic_delete"
-        android:layout_below="@+id/deleteDue"
-        android:layout_alignLeft="@+id/editReminder"
-        android:layout_alignStart="@+id/deleteDue" />
-
-
+    <!--android:id="@+id/spinner1"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:spinnerMode="dropdown"-->
+    <!--android:layout_marginTop="20dp"-->
+    <!--android:layout_alignStart="@+id/editReminder"-->
+    <!--android:layout_alignEnd="@+id/editReminder"-->
+    <!--android:layout_below="@+id/editReminder"-->
+    <!--android:layout_alignLeft="@+id/editReminder"-->
+    <!--android:layout_alignRight="@+id/editReminder" />-->
 
 
     <Spinner
         android:id="@+id/spinner1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+
+        android:layout_alignTop="@+id/imageView7"
+        android:layout_marginRight="85dp"
+        android:layout_toRightOf="@+id/imageView7"
+        android:background="?android:attr/colorBackground"
+        android:spinnerMode="dropdown"
+        android:theme="@style/MySpinner" />
+
+    <ImageView
+        android:id="@+id/imageView7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:spinnerMode="dropdown"
-
-        android:layout_alignTop="@+id/btnDel"
-        android:layout_toLeftOf="@+id/btnDel"
-        android:layout_alignLeft="@+id/editNotes"
-        android:layout_alignStart="@+id/editNotes" />
-
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:background="?android:attr/colorBackground"
+        android:padding="10dp"
+        android:tint="@drawable/color_selector2"
+        app:srcCompat="@drawable/ic_list_black_24dp"
+        android:layout_alignRight="@+id/imageView3"
+        android:layout_alignEnd="@+id/imageView3" />
 
     <Button
         android:id="@+id/btnDel"
+
+        style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Delete"
         android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/editNotes"
-        android:layout_alignEnd="@+id/editNotes" />
-
-
-
-
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/spinner1"
+        android:layout_toRightOf="@+id/nner1"
+        android:background="@android:color/holo_red_light"
+        android:text="Delete" />
 
 
 </android.widget.RelativeLayout>
