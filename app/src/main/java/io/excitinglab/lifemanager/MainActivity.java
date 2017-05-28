@@ -451,7 +451,7 @@ public class MainActivity extends AppCompatActivity
             builderSingle.setIcon(R.drawable.ic_sort_black_24dp);
             builderSingle.setTitle("Select sort method");
 
-            final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(MainActivity.this, android.R.layout.select_dialog_singlechoice);
+            final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(MainActivity.this, R.layout.select_sort);
             arrayAdapter.add("Creation date");
 //            arrayAdapter.add("Alphabetically Z-A");
             arrayAdapter.add("Due date");
