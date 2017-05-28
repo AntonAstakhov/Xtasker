@@ -305,7 +305,7 @@ public class AddTaskActivity extends AppCompatActivity  implements DatePickerDia
         if (insertData == -1) {
             toastMessage("Something went wrong");
         } else {
-            toastMessage("Data Successfully Inserted!");
+//            toastMessage("Data Successfully Inserted!");
         }
 
 
