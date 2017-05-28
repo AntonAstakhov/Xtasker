@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="io.excitinglab.xtasker.FeedbackActivity">
+    tools:context="io.excitinglab.lifemanager.FeedbackActivity">
 
     <TextView
         android:id="@+id/textView7"

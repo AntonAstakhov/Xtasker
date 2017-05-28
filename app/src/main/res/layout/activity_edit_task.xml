@@ -9,7 +9,7 @@
 
     android:focusableInTouchMode="true"
     android:isScrollContainer="true"
-    tools:context="io.excitinglab.xtasker.EditTaskActivity">
+    tools:context="io.excitinglab.lifemanager.EditTaskActivity">
 
     <ScrollView
         android:layout_width="match_parent"

@@ -4,6 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="io.excitinglab.xtasker.HelpActivity">
+    tools:context="io.excitinglab.lifemanager.HelpActivity">
 
 </android.support.constraint.ConstraintLayout>

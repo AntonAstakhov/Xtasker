@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="io.excitinglab.xtasker">
+    package="io.excitinglab.lifemanager">
 
     <!--<uses-permission android:name="android.permission.READ_CALENDAR" />-->
     <!--<uses-permission android:name="android.permission.WRITE_CALENDAR" />-->
@@ -17,7 +17,7 @@
         android:theme="@style/MyTheme">
 
         <activity
-            android:name="io.excitinglab.xtasker.WelcomeActivity"
+            android:name="io.excitinglab.lifemanager.WelcomeActivity"
             android:screenOrientation="portrait"
             android:theme="@style/MyTheme_NoActionBar">
             <intent-filter>
@@ -28,60 +28,60 @@
         </activity>
 
         <activity
-            android:name=".MainActivity"
+            android:name="io.excitinglab.lifemanager.MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/MyTheme_NoActionBar" />
 
         <activity
-            android:name=".AddTaskActivity"
+            android:name="io.excitinglab.lifemanager.AddTaskActivity"
             android:label="New Task"
             android:windowSoftInputMode="adjustResize"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName="io.excitinglab.lifemanager.MainActivity"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".AddListActivity"
-            android:parentActivityName=".MainActivity"
+            android:name="io.excitinglab.lifemanager.AddListActivity"
+            android:parentActivityName="io.excitinglab.lifemanager.MainActivity"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".EditListActivity"
-            android:parentActivityName=".MainActivity"
+            android:name="io.excitinglab.lifemanager.EditListActivity"
+            android:parentActivityName="io.excitinglab.lifemanager.MainActivity"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".EditTaskActivity"
+            android:name="io.excitinglab.lifemanager.EditTaskActivity"
             android:label="Edit task"
             android:windowSoftInputMode="adjustPan"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName="io.excitinglab.lifemanager.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/MyTheme"/>
 
         <activity
             android:screenOrientation="portrait"
-            android:name=".SettingsActivity"
+            android:name="io.excitinglab.lifemanager.SettingsActivity"
             android:label="@string/title_activity_settings" />
 
         <activity
-            android:name=".ShareActivity"
+            android:name="io.excitinglab.lifemanager.ShareActivity"
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".FeedbackActivity"
+            android:name="io.excitinglab.lifemanager.FeedbackActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="io.excitinglab.xtasker.MainActivity" />
+                android:value="io.excitinglab.lifemanager.MainActivity" />
         </activity>
 
         <activity
-            android:name=".HelpActivity"
+            android:name="io.excitinglab.lifemanager.HelpActivity"
             android:screenOrientation="portrait"
             android:theme="@style/MyTheme_NoActionBar"/>
 
-        <receiver android:name=".Alarm"/>
+        <receiver android:name="io.excitinglab.lifemanager.Alarm"/>
 
     </application>
 
