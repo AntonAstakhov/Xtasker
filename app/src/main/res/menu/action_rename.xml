@@ -5,7 +5,7 @@
     <!--Add-->
     <item
         android:id="@+id/action_add"
-        android:icon="@drawable/ic_check_box_black_24dp"
+        android:icon="@drawable/ic_done_black_24dp"
         android:title="Done"
         app:showAsAction="always"
         />

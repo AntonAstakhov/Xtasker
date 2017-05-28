@@ -93,7 +93,7 @@ public class MyAdapter extends BaseAdapter {
         TextView text3 = (TextView) vi.findViewById(R.id.tv_date);
 //        TextView text4 = (TextView) vi.findViewById(R.id.tv_notif);
         ImageView img1=(ImageView) vi.findViewById(R.id.img_date);
-//        ImageView img2=(ImageView) vi.findViewById(R.id.img_notif);
+        ImageView img2=(ImageView) vi.findViewById(R.id.img_notif);
 //        ImageView img3=(ImageView) vi.findViewById(R.id.img_attention);
 //        CheckBox ch=(CheckBox) vi.findViewById(R.id.checkBox);
         text1.setText(tasks.get(position).getName());
@@ -151,18 +151,17 @@ public class MyAdapter extends BaseAdapter {
             img1.setVisibility(View.INVISIBLE);
         }
 
-//        if (tasks.get(position).getReminder()!=NULL) {
+        if (tasks.get(position).getReminder()==NULL || tasks.get(position).getReminder()==0) {
+            img2.setVisibility(View.INVISIBLE);
+        }
+        else {
 //            Date datetime=new Date(tasks.get(position).getReminder());
 ////            SimpleDateFormat sdf2=new SimpleDateFormat("EEE, d MMM hh:mm aaa");
 //            SimpleDateFormat sdf2=new SimpleDateFormat("hh:mm a");
 ////            SimpleDateFormat sdf2=new SimpleDateFormat("yyyy.MM.dd HH:mm");
 //            timeString=sdf2.format(datetime);
-//
-//            img2.setVisibility(View.VISIBLE);
-//        }
-//        else {
-//            img2.setVisibility(View.INVISIBLE);
-//        }
+            img2.setVisibility(View.VISIBLE);
+        }
 
         text3.setText(dateString);
 //        text4.setText(timeString);

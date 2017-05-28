@@ -71,7 +71,7 @@ public class Alarm extends BroadcastReceiver {
 
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(context)
-                        .setSmallIcon(R.drawable.ic_alarm_black_18dp)
+                        .setSmallIcon(R.drawable.ic_logo_temp_web_burned)
                         .setContentTitle(mDatabaseHelper.getTask(ID).getName())
                         .setPriority(Notification.PRIORITY_HIGH)
                         .setAutoCancel(true)
