@@ -216,6 +216,11 @@ public class MainActivity extends AppCompatActivity
             intent = new Intent(this, HelpActivity.class);
             startActivity(intent);
         }
+        else if (id == R.id.nav_about) {
+            item.setCheckable(false);
+//            intent = new Intent(this, AboutActivity.class);
+//            startActivity(intent);
+        }
         else {
 
             navItemIndex = 3;
@@ -529,7 +534,7 @@ public class MainActivity extends AppCompatActivity
                 navItemIndex = 3;
                 current_list_id = mDatabaseHelper.getList(result).getId();
 
-                selectedMenuItemId = menu.size()-4;
+                selectedMenuItemId = menu.size()-5;
 
             }
             if (resultCode == Activity.RESULT_CANCELED) {
