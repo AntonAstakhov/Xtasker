@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Typeface;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -128,13 +130,20 @@ public class MyAdapterToday extends BaseAdapter {
         calendar.setTime(nowDate);
         calendar.add(Calendar.DATE, -1);
         nowDate = calendar.getTime();
+//        ImageView img3=(ImageView) vi.findViewById(R.id.img_attention);
         if (d.before(nowDate)) {
-//            ImageView img3=(ImageView) vi.findViewById(R.id.img_attention);
+
 //            img3.setVisibility(View.VISIBLE);
 //            text1.setTextColor(Color.parseColor("#FF0000"));
+
+//            text1.setTypeface(null, Typeface.BOLD);
+//            text1.setTextColor(Color.parseColor("#FF0000"));
+            img1.setColorFilter(ContextCompat.getColor(context,R.color.red_accent200));
+            text3.setTextColor(Color.parseColor("#FF0000"));
         }
         else {
-//do nothing?
+//            img3.setVisibility(View.INVISIBLE);
+//            text1.setTypeface(null, Typeface.NORMAL);
         }
 
         if (tasks.get(position).getP_id() == 0) {

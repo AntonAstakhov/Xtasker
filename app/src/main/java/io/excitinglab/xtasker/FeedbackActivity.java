@@ -23,7 +23,7 @@ public class FeedbackActivity extends AppCompatActivity {
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String toemailAddress = "exciting.lab90210@gmail.com";
+                String toemailAddress = "excitinglab.io@gmail.com";
                 String msubject = textIssue.getText().toString();
                 String mmessage = textNotes.getText().toString();
 
