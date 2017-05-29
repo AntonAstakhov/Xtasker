@@ -27,10 +27,10 @@ public class AboutActivity extends AppCompatActivity {
 
         aboutBody = (TextView) findViewById(R.id.aboutBody);
         aboutBody.setText("LifeManager is a simple yet effective tool for your task management. There is no bloat or clutter – just what you need to get things done.\n" +
-                "LifeManager is currently in alpha testing. Please let us know if you encounter any issues.\n" +
-                "excitinglab.io@gmail.com\n" +
-                "SwipeActionAdapter\n" +
-                "Copyright (c) 2014 Wouter Dullaert\n" +
+                "\nLifeManager is currently in alpha testing. Please let us know if you encounter any issues.\n" +
+                "\nexcitinglab.io@gmail.com\n" +
+                "\nSwipeActionAdapter\n" +
+                "\nCopyright (c) 2014 Wouter Dullaert\n" +
                 "Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with the License.\n" +
                 "You may obtain a copy of the License at\n" +
                 "http://www.apache.org/licenses/LICENSE-2.0\n" +

@@ -14,23 +14,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e0bf5651-3dc3-4c2d-abca-5ebe72af9c21" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/io/excitinglab/lifemanager/AboutActivity.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_about.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/content_about.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/menu/menu_about.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileHashes.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileSnapshots.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/io/excitinglab/lifemanager/MainActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/io/excitinglab/lifemanager/MainActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/dimens.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/dimens.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/io/excitinglab/lifemanager/AboutActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/io/excitinglab/lifemanager/AboutActivity.java" />
     </list>
     <ignored path="Xtasker.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -111,8 +102,8 @@
       <file leaf-file-name="AboutActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/io/excitinglab/lifemanager/AboutActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="267">
-              <caret line="22" column="43" selection-start-line="22" selection-start-column="43" selection-end-line="22" selection-end-column="43" />
+            <state relative-caret-position="537">
+              <caret line="40" column="0" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -2078,8 +2069,8 @@
         <option value="$PROJECT_DIR$/app/build/intermediates/manifests/full/debug/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/io/excitinglab/lifemanager/MainActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/io/excitinglab/lifemanager/AboutActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_about.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/io/excitinglab/lifemanager/AboutActivity.java" />
       </list>
     </option>
   </component>
@@ -2818,7 +2809,14 @@
       <option name="project" value="LOCAL" />
       <updated>1496017184719</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Life Manager 29.05 (3 am)">
+      <created>1496018129507</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1496018129507</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TodoView">
@@ -3203,14 +3201,14 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1496018056000" expanded="true" signature="59:212408" ph="..." />
-            <marker date="1496018056000" expanded="true" signature="123:208" ph="..." />
-            <marker date="1496018056000" expanded="true" signature="141:192" ph="..." />
-            <marker date="1496018056000" expanded="true" signature="495:517" ph="..." />
-            <marker date="1496018056000" expanded="true" signature="212334:212351" ph="..." />
-            <marker date="1496018056000" expanded="true" signature="212334:212369" ph="..." />
-            <marker date="1496018056000" expanded="true" signature="212334:212382" ph="..." />
-            <marker date="1496018056000" expanded="true" signature="212334:212397" ph="..." />
+            <marker date="1496018536000" expanded="true" signature="59:211792" ph="..." />
+            <marker date="1496018536000" expanded="true" signature="123:208" ph="..." />
+            <marker date="1496018536000" expanded="true" signature="141:192" ph="..." />
+            <marker date="1496018536000" expanded="true" signature="495:517" ph="..." />
+            <marker date="1496018536000" expanded="true" signature="211718:211735" ph="..." />
+            <marker date="1496018536000" expanded="true" signature="211718:211753" ph="..." />
+            <marker date="1496018536000" expanded="true" signature="211718:211766" ph="..." />
+            <marker date="1496018536000" expanded="true" signature="211718:211781" ph="..." />
           </folding>
         </state>
       </provider>
@@ -3402,8 +3400,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/io/excitinglab/lifemanager/AboutActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="267">
-          <caret line="22" column="43" selection-start-line="22" selection-start-column="43" selection-end-line="22" selection-end-column="43" />
+        <state relative-caret-position="537">
+          <caret line="40" column="0" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
