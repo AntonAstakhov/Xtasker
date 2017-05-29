@@ -33,7 +33,7 @@
         <item name="colorPrimaryDark">@color/mcolorPrimaryDark</item>
     </style>
 
-    <style name="MyTheme" parent="AppTheme" >
+    <style name="MyTheme" parent="AppTheme">
         <item name="colorPrimary">@color/mcolorPrimary</item>
         <item name="colorAccent">@color/mcolorAccent</item>
         <item name="colorPrimaryDark">@color/mcolorPrimaryDark</item>
@@ -48,7 +48,7 @@
     </style>
 
     <!--border style-->
-    <style name="MyBorderBackgroundStyle" parent="Widget.AppCompat.TextView.SpinnerItem" >
+    <style name="MyBorderBackgroundStyle" parent="Widget.AppCompat.TextView.SpinnerItem">
         <item name="android:background">@drawable/border_background</item>
         <item name="android:padding">10dp</item>
     </style>
@@ -64,6 +64,10 @@
         <item name="itemTextAppearance">@drawable/color_selector</item>
         <item name="itemBackground">@drawable/color_selector</item>
     </style>
+
+    <style name="MyTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="MyTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 
 </resources>

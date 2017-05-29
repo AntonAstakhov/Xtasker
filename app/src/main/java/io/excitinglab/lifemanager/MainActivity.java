@@ -218,8 +218,8 @@ public class MainActivity extends AppCompatActivity
         }
         else if (id == R.id.nav_about) {
             item.setCheckable(false);
-//            intent = new Intent(this, AboutActivity.class);
-//            startActivity(intent);
+            intent = new Intent(this, AboutActivity.class);
+            startActivity(intent);
         }
         else {
 
