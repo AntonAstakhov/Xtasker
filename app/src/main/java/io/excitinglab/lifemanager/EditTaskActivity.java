@@ -25,23 +25,15 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 public class EditTaskActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
 
     DatabaseHelper mDatabaseHelper;
 
-    private Button btnAdd;
-
-    //    private EditText editText;
-    private TextView textView;
-
     String selectedList;
     int listID;
     int taskID;
-
-    static final int DUE_DIALOG_ID = 0;
-    static final int REM_DIALOG_ID = 1;
-    TextView editDueDate, editReminder;
 
     TextView btnDue, btnRem;
     String dateString, timeString;
@@ -63,10 +55,6 @@ public class EditTaskActivity extends AppCompatActivity implements DatePickerDia
 
     Button btnDel;
 
-    private static String TaskName;
-
-    private static int ID;
-
     Intent newList;
 
     @Override
@@ -74,20 +62,13 @@ public class EditTaskActivity extends AppCompatActivity implements DatePickerDia
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_task);
 
-        mDatabaseHelper = mDatabaseHelper.getInstance(this);
-
-
-        TaskName = "";
-
-        ID = 0;
+        mDatabaseHelper = DatabaseHelper.getInstance(this);
 
         newList = new Intent(this, AddListActivity.class);
 
 
-
         Intent intent = getIntent();
         taskID = intent.getIntExtra("id", -1);
-//        Log.e("EditTasks: ", String.valueOf(taskID));
         listID = mDatabaseHelper.getTask(taskID).getP_id();
 
         today = Calendar.getInstance();
@@ -207,14 +188,14 @@ public class EditTaskActivity extends AppCompatActivity implements DatePickerDia
 
         if (mDatabaseHelper.getTask(id).getDeadline() != 0) {
             Date datetime = new Date(mDatabaseHelper.getTask(id).getDeadline());
-            SimpleDateFormat sdf1=new SimpleDateFormat("dd.MM.yyyy");
+            SimpleDateFormat sdf1=new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault());
             String s1 = sdf1.format(datetime);
             btnDue.setText(s1);
         }
 
         if (mDatabaseHelper.getTask(id).getReminder() !=0 ) {
             Date datetime2=new Date(mDatabaseHelper.getTask(id).getReminder());
-            SimpleDateFormat sdf2=new SimpleDateFormat("dd.MM.yyyy HH:mm");
+            SimpleDateFormat sdf2=new SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.getDefault());
             String s2 = sdf2.format(datetime2);
             btnRem.setText(s2);
         }
@@ -248,7 +229,7 @@ public class EditTaskActivity extends AppCompatActivity implements DatePickerDia
 
         items.add(items.size(), "Add new list...");
 
-        ArrayAdapter<String> adapter = new ArrayAdapter(this,R.layout.spinner_item, items);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,R.layout.spinner_item, items);
         dropdown.setAdapter(adapter);
     }
 
@@ -267,8 +248,8 @@ public class EditTaskActivity extends AppCompatActivity implements DatePickerDia
             task.setName(mDatabaseHelper.getTask(taskID).getName());
         }
 
-        long insertData = -1;
-        int i = 0;
+        long insertData;
+        int i;
 
         if (selectedList.equals("Inbox")) {
             i = 0;
@@ -294,34 +275,10 @@ public class EditTaskActivity extends AppCompatActivity implements DatePickerDia
         task.setNote(s);
         task.setP_id(i);
 
-//        Log.e("BEFORE: ", String.valueOf(taskID));
-
         insertData = mDatabaseHelper.updateTask(task);
 
-//        TaskName = task.getName();
-//        ID = (int) insertData;
-
-
-//        if (reminderTime != 0) {
-//            Intent intent2 = new Intent(this, Alarm.class);
-//            intent2.putExtra("Title", TaskName);
-//            intent2.putExtra("List", selectedList);
-//            PendingIntent pendingIntent = PendingIntent.getBroadcast(this, ID, intent2, PendingIntent.FLAG_UPDATE_CURRENT);
-//
-//            AlarmManager am = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
-//
-//            if (Build.VERSION.SDK_INT < 19) {
-//                am.set(AlarmManager.RTC_WAKEUP, reminderTime, pendingIntent);
-//            } else {
-//                am.setExact(AlarmManager.RTC_WAKEUP, reminderTime, pendingIntent);
-//            }
-//        }
-
-
         if (insertData == -1) {
-//            toastMessage("Something went wrong");
-        } else {
-//            toastMessage("Data Successfully Inserted!");
+            toastMessage("Something went wrong");
         }
     }
 
@@ -340,7 +297,7 @@ public class EditTaskActivity extends AppCompatActivity implements DatePickerDia
             dueTime = today.getTimeInMillis();
 
             Date datetime=new Date(dueTime);
-            SimpleDateFormat sdf1=new SimpleDateFormat("dd.MM.yyyy");
+            SimpleDateFormat sdf1=new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault());
             dateString = sdf1.format(datetime);
             btnDue.setText(dateString);
 
@@ -366,7 +323,7 @@ public class EditTaskActivity extends AppCompatActivity implements DatePickerDia
 
 
         Date datetime=new Date(reminderTime);
-        SimpleDateFormat sdf1=new SimpleDateFormat("dd.MM.yyyy HH:mm");
+        SimpleDateFormat sdf1=new SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.getDefault());
         timeString = sdf1.format(datetime);
         btnRem.setText(timeString);
 
@@ -420,9 +377,9 @@ public class EditTaskActivity extends AppCompatActivity implements DatePickerDia
                 listID = mDatabaseHelper.getList(result).getId();
                 selectedList = result;
             }
-            if (resultCode == Activity.RESULT_CANCELED) {
-
-            }
+//            if (resultCode == Activity.RESULT_CANCELED) {
+//
+//            }
         }
     }
 }

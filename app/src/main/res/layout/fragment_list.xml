@@ -15,8 +15,8 @@
             android:layout_height="match_parent"
             android:clipToPadding="false"
             android:dividerHeight="1dp"
-            android:paddingBottom="?android:listPreferredItemHeight"
-            android:scrollbarStyle="outsideOverlay"
+            android:paddingBottom="75dp"
+            android:scrollbars="none"
 
             >
             <!--android:divider="#00000000"-->

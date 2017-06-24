@@ -3,12 +3,12 @@ package io.excitinglab.lifemanager;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 
 import android.support.v4.app.Fragment;
@@ -28,17 +28,9 @@ import android.widget.ArrayAdapter;
 import java.util.ArrayList;
 
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
-
-//    ListView listView;
-//    private ArrayAdapter<String> mAdapter;
-//    private ImageView imgNavHeaderBg, imgProfile;
-//    private TextView txtName, txtWebsite;
-//    private Toolbar toolbar;
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawer;
-    private View navHeader;
 
     private FloatingActionButton fab;
 
@@ -56,35 +48,26 @@ public class MainActivity extends AppCompatActivity
 
     private String[] activityTitles;
 
-    private boolean shouldLoadHomeFragOnBackPress = true;
     private Handler mHandler;
 
     Intent intent, intent2;
     private NavigationView navigationView;
     DatabaseHelper mDatabaseHelper;
 
-//    protected ActionBarDrawerToggle mDrawerToggle;
-//    private DrawerLayout mDrawerLayout;
-
     private static boolean SHOW_COMPLETED = false;
 
     private static int SORTLIST = -1;
-
-    private static Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-        MainActivity.context = getApplicationContext();
-
         SHOW_COMPLETED = false;
 
         SORTLIST = -1;
 
-        mDatabaseHelper = mDatabaseHelper.getInstance(this);
+        mDatabaseHelper = DatabaseHelper.getInstance(this);
 
         mHandler = new Handler();
 
@@ -93,8 +76,6 @@ public class MainActivity extends AppCompatActivity
         fab = (FloatingActionButton) findViewById(R.id.fab);
 
         activityTitles = getResources().getStringArray(R.array.nav_item_activity_titles);
-
-        navHeader = navigationView.getHeaderView(0);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("Today");
@@ -108,7 +89,7 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int i = 0;
+                int i;
                 if (navItemIndex == 3) {
                     i = current_list_id;
                 }
@@ -124,7 +105,7 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
+        drawer.addDrawerListener(toggle);
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -133,10 +114,6 @@ public class MainActivity extends AppCompatActivity
 
         navigationView.getMenu().getItem(0).setChecked(true);
 
-//        loadNavHeader();
-
-//        setUpNavigationView();
-
         if (savedInstanceState == null) {
             navItemIndex = 0;
             CURRENT_TAG = TAG_TODAY;
@@ -144,11 +121,6 @@ public class MainActivity extends AppCompatActivity
         }
 
     }
-
-    public static Context getAppContext() {
-        return MainActivity.context;
-    }
-
 
     @Override
     public void onBackPressed() {
@@ -163,7 +135,7 @@ public class MainActivity extends AppCompatActivity
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
         int id = item.getItemId();
 
@@ -186,12 +158,8 @@ public class MainActivity extends AppCompatActivity
             intent = new Intent(this, SettingsActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_rate) {
-
-//            Todo: CHANGE URL
-
             item.setCheckable(false);
-            Uri uri = Uri.parse("market://details?id=" + context.getPackageName());
-//            Uri uri = Uri.parse("market://details?id=com.wunderkinder.wunderlistandroid");
+            Uri uri = Uri.parse("market://details?id=" + getApplicationContext().getPackageName());
             Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
             goToMarket.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY |
                     Intent.FLAG_ACTIVITY_NEW_DOCUMENT |
@@ -200,13 +168,8 @@ public class MainActivity extends AppCompatActivity
                 startActivity(goToMarket);
             } catch (ActivityNotFoundException e) {
                 startActivity(new Intent(Intent.ACTION_VIEW,
-                        Uri.parse("http://play.google.com/store/apps/details?id=" + context.getPackageName())));
-//                        Uri.parse("http://play.google.com/store/apps/details?id=com.wunderkinder.wunderlistandroid")));
+                        Uri.parse("http://play.google.com/store/apps/details?id=" + getApplicationContext().getPackageName())));
             }
-//        } else if (id == R.id.nav_share) {
-//            item.setCheckable(false);
-//            intent = new Intent(this, ShareActivity.class);
-//            startActivity(intent);
         } else if (id == R.id.nav_feedback) {
             item.setCheckable(false);
             intent = new Intent(this, FeedbackActivity.class);
@@ -258,11 +221,6 @@ public class MainActivity extends AppCompatActivity
         for (int i = 0; i < lists.size(); i++) {
             String s = lists.get(i).getName();
 
-//            if (s.length() > 24) {
-//                s = s.substring(0, 22);
-//                s = s + "...";
-//            }
-
             menu.add(R.id.group2,Menu.NONE,4,s).setIcon(R.drawable.ic_list_black_24dp);
         }
 
@@ -283,6 +241,8 @@ public class MainActivity extends AppCompatActivity
 //    }
 
     private void loadHomeFragment() {
+
+        Log.e("HEY: ", "loadHomeFragment is here !!!!!!!!!!");
 
         selectNavMenu();
 
@@ -315,9 +275,7 @@ public class MainActivity extends AppCompatActivity
         };
 
         // If mPendingRunnable is not null, then add to the message queue
-        if (mPendingRunnable != null) {
-            mHandler.post(mPendingRunnable);
-        }
+        mHandler.post(mPendingRunnable);
 
         // show or hide the fab button
         toggleFab();
@@ -332,17 +290,13 @@ public class MainActivity extends AppCompatActivity
     private Fragment getHomeFragment() {
         switch (navItemIndex) {
             case 0:
-                TodayFragment todayFragment = new TodayFragment();
-                return todayFragment;
+                return new TodayFragment();
             case 1:
-                WeekFragment weekFragment = new WeekFragment();
-                return weekFragment;
+                return new WeekFragment();
             case 2:
-                InboxFragment inboxFragment = new InboxFragment();
-                return inboxFragment;
+                return new InboxFragment();
             case 3:
-                ListViewFragment listViewFragment = new ListViewFragment();
-                return listViewFragment;
+                return new ListViewFragment();
             default:
                 return new TodayFragment();
         }
@@ -354,10 +308,10 @@ public class MainActivity extends AppCompatActivity
 //        getSupportActionBar().setTitle(activityTitles[navItemIndex]);
 
         if (CURRENT_TAG.equals(TAG_TODAY) || CURRENT_TAG.equals(TAG_WEEK) || CURRENT_TAG.equals(TAG_INBOX)) {
-            getSupportActionBar().setTitle(activityTitles[navItemIndex]);
+            if (getSupportActionBar() != null) getSupportActionBar().setTitle(activityTitles[navItemIndex]);
         }
         else if (CURRENT_TAG.equals(TAG_LIST)){
-            getSupportActionBar().setTitle(mDatabaseHelper.getListByID(current_list_id).getName());
+            if (getSupportActionBar() != null) getSupportActionBar().setTitle(mDatabaseHelper.getListByID(current_list_id).getName());
         }
     }
 
@@ -475,9 +429,24 @@ public class MainActivity extends AppCompatActivity
                     String strName = arrayAdapter.getItem(which);
 
 
-                    if (arrayAdapter.getItem(which).equals("Creation date")) SORTLIST = 0;
-                    else if (arrayAdapter.getItem(which).equals("Due date")) SORTLIST = 2;
-                    else if (arrayAdapter.getItem(which).equals("Alphabetically")) SORTLIST = 4;
+                    if (strName != null) {
+
+                        switch (strName) {
+                            case "Creation date":
+                                SORTLIST = 0;
+                                break;
+                            case "Due date":
+                                SORTLIST = 2;
+                                break;
+                            case "Alphabetically":
+                                SORTLIST = 4;
+                                break;
+                        }
+
+//                        if (strName.equals("Creation date")) SORTLIST = 0;
+//                        else if (strName.equals("Due date")) SORTLIST = 2;
+//                        else if (strName.equals("Alphabetically")) SORTLIST = 4;
+                    }
 
 //                    Log.e("SORT_FUNC:", String.valueOf(SORTLIST));
 
@@ -537,9 +506,9 @@ public class MainActivity extends AppCompatActivity
                 selectedMenuItemId = menu.size()-5;
 
             }
-            if (resultCode == Activity.RESULT_CANCELED) {
-//                onResume();
-            }
+//            if (resultCode == Activity.RESULT_CANCELED) {
+////                onResume();
+//            }
         }
 
         if (requestCode == 2) {
@@ -558,11 +527,9 @@ public class MainActivity extends AppCompatActivity
                     menu.removeGroup(R.id.group2);
                     addItemsRunTime(navigationView);
 
-                    boolean z = false;
                     for (int j = 0; j < navigationView.getMenu().size(); j++) {
                         if (navigationView.getMenu().getItem(j).getTitle().toString().equals(mDatabaseHelper.getListByID(result).getName())) {
                             selectedMenuItemId = j;
-                            z = true;
                             break;
                         }
                     }
@@ -572,9 +539,9 @@ public class MainActivity extends AppCompatActivity
                 }
 
             }
-            if (resultCode == Activity.RESULT_CANCELED) {
-//                onResume();
-            }
+//            if (resultCode == Activity.RESULT_CANCELED) {
+////                onResume();
+//            }
         }
     }
 

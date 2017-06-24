@@ -68,16 +68,14 @@ public class WeekFragment extends Fragment {
     }
 
     DatabaseHelper mDatabaseHelper;
-    private ListView mListView;
-    MyAdapterToday adapter;
-
+    MyAdapterToday adapter; // TODO: Make it 'MyAdapterWeek' adapter
 
     @Override
     public void onStart(){
         super.onStart();
 
-        mDatabaseHelper = mDatabaseHelper.getInstance(getActivity());
-        mListView = (ListView) getActivity().findViewById(R.id.listView);
+        mDatabaseHelper = DatabaseHelper.getInstance(getActivity());
+        ListView mListView = (ListView) getActivity().findViewById(R.id.listView);
 
         final ArrayList<Task> tasks = new ArrayList<>();
         tasks.addAll(mDatabaseHelper.getAllTasksForWeek());
@@ -136,7 +134,7 @@ public class WeekFragment extends Fragment {
                 for(int i=0;i<positionList.length;i++) {
                     SwipeDirection direction = directionList[i];
                     int position = positionList[i];
-                    String dir = "";
+//                    String dir = "";
 
                     if (direction == SwipeDirection.DIRECTION_FAR_LEFT) {
                         mDatabaseHelper.deleteTask(tasks.get(position).getId());

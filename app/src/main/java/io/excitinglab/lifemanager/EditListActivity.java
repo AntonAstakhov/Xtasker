@@ -6,14 +6,12 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 public class EditListActivity extends AppCompatActivity {
 
     DatabaseHelper mDatabaseHelper;
-    private Button btnSave;
     private EditText editText;
     int selectedID;
     Lists list;
@@ -27,11 +25,9 @@ public class EditListActivity extends AppCompatActivity {
         selectedID = intent.getIntExtra("id",-1);
 
         editText = (EditText) findViewById(R.id.editText);
-//        btnSave = (Button) findViewById(R.id.btnSave);
-//        btnDel= (Button) findViewById(R.id.btnDel);
-        mDatabaseHelper = mDatabaseHelper.getInstance(this);
+        mDatabaseHelper = DatabaseHelper.getInstance(this);
 
-        getSupportActionBar().setTitle("Edit list");
+        if (getSupportActionBar() != null) getSupportActionBar().setTitle("Edit list");
 
         list = new Lists();
         list = mDatabaseHelper.getListByID(selectedID);
@@ -40,37 +36,11 @@ public class EditListActivity extends AppCompatActivity {
         editText.setSelection(editText.getText().length());
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
-
-//        btnSave.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                String item = editText.getText().toString();
-//
-//                if (item.equals(mDatabaseHelper.getListByID(selectedID).getName())) {
-//                    finish();
-//                }
-//
-//                else if (!item.equals("")){
-//                    Lists list;
-//                    list = mDatabaseHelper.getListByID(selectedID);
-//                    list.setName(item);
-//                    mDatabaseHelper.updateList(list);
-//                    toastMessage(mDatabaseHelper.getListByID(selectedID).getName());
-//                    finish();
-//                } else {
-//                    toastMessage("You must enter a name");
-//                }
-//            }
-//        });
     }
 
     private void toastMessage(String message){
         Toast.makeText(this,message, Toast.LENGTH_SHORT).show();
     }
-
-
-
-
 
 
     @Override
@@ -95,7 +65,7 @@ public class EditListActivity extends AppCompatActivity {
                 list = mDatabaseHelper.getListByID(selectedID);
                 list.setName(i);
                 mDatabaseHelper.updateList(list);
-                toastMessage(mDatabaseHelper.getListByID(selectedID).getName());
+//                toastMessage(mDatabaseHelper.getListByID(selectedID).getName());
                 finish();
             } else {
                 toastMessage("You must enter a name");

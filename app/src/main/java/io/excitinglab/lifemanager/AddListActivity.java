@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -16,7 +15,6 @@ import android.view.Menu;
 public class AddListActivity extends AppCompatActivity {
 
     DatabaseHelper mDatabaseHelper;
-    private Button btnAdd;
     private EditText editText;
     Intent intent;
 
@@ -25,12 +23,10 @@ public class AddListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_list);
 
-
+        mDatabaseHelper = DatabaseHelper.getInstance(this);
         editText = (EditText) findViewById(R.id.editText);
-//        btnAdd = (Button) findViewById(R.id.btnAdd);
-        mDatabaseHelper = mDatabaseHelper.getInstance(this);
 
-        getSupportActionBar().setTitle("Create new list");
+        if (getSupportActionBar() != null) getSupportActionBar().setTitle("Create new list");
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
     }
@@ -38,12 +34,6 @@ public class AddListActivity extends AppCompatActivity {
     public void AddData(String newEntry) {
         Lists list = new Lists(newEntry);
         int insertData = mDatabaseHelper.createList(list);
-
-        if (insertData == -1) {
-//            toastMessage("Something went wrong");
-        } else {
-//            toastMessage("Data Successfully Inserted!");
-        }
 
         Intent returnIntent = new Intent();
         returnIntent.putExtra("result",mDatabaseHelper.getListByID(insertData).getName());

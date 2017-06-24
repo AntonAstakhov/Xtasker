@@ -48,7 +48,7 @@
     </style>
 
     <!--border style-->
-    <style name="MyBorderBackgroundStyle" parent="Widget.AppCompat.TextView.SpinnerItem">
+    <style name="MyBorderBackgroundStyle" parent="Widget.AppCompat.ImageButton">
         <item name="android:background">@drawable/border_background</item>
         <item name="android:padding">10dp</item>
     </style>

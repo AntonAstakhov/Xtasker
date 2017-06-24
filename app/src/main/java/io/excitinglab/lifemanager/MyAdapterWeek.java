@@ -16,6 +16,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 import static java.sql.Types.NULL;
 
@@ -24,7 +25,7 @@ public class MyAdapterWeek extends BaseAdapter {
 
 
     DatabaseHelper mDatabaseHelper;
-    CheckBox checkBox;
+//    CheckBox checkBox;
 
 
     Context context;
@@ -62,7 +63,7 @@ public class MyAdapterWeek extends BaseAdapter {
         if (vi == null)
             vi = inflater.inflate(R.layout.row, parent,false);
 
-        mDatabaseHelper = mDatabaseHelper.getInstance(context);
+        mDatabaseHelper = DatabaseHelper.getInstance(context);
 
 
 
@@ -97,12 +98,12 @@ public class MyAdapterWeek extends BaseAdapter {
         if (d.before(nowDate)) {
             text1.setTextColor(Color.parseColor("#FF0000"));
         }
-        else {
-
-        }
+//        else {
+//
+//        }
 
         if (tasks.get(position).getP_id() == 0) {
-            text2.setText("Inbox");
+            text2.setText(R.string.Inbox);
         }
         else {
             text2.setText(mDatabaseHelper.getListByID(tasks.get(position).getP_id()).getName());
@@ -112,11 +113,11 @@ public class MyAdapterWeek extends BaseAdapter {
 
 
         String dateString="";
-        String timeString="";
+//        String timeString="";
         if (tasks.get(position).getDeadline()!=NULL) {
             Date datetime=new Date(tasks.get(position).getDeadline());
 //            SimpleDateFormat sdf1=new SimpleDateFormat("EEE, d MMM");
-            SimpleDateFormat sdf1=new SimpleDateFormat("EEE");
+            SimpleDateFormat sdf1=new SimpleDateFormat("EEE", Locale.getDefault());
             dateString=sdf1.format(datetime);
         }
         else {
@@ -141,9 +142,9 @@ public class MyAdapterWeek extends BaseAdapter {
     }
 
 
-    private void toastMessage(String message){
-        Toast.makeText(context,message, Toast.LENGTH_SHORT).show();
-    }
+//    private void toastMessage(String message){
+//        Toast.makeText(context,message, Toast.LENGTH_SHORT).show();
+//    }
 
 }
 

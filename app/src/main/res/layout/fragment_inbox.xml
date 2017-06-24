@@ -11,11 +11,12 @@
 
         <ListView
             android:clipToPadding="false"
-            android:paddingBottom="?android:listPreferredItemHeight"
+            android:paddingBottom="75dp"
             android:id="@+id/listView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:dividerHeight="1dp"
+            android:scrollbars="none"
             >
             <!--android:divider="#00000000"-->
         </ListView>

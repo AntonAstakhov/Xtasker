@@ -20,9 +20,6 @@ public class InboxFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    private String mParam1;
-    private String mParam2;
-
     private OnFragmentInteractionListener mListener;
 
     public InboxFragment() {
@@ -41,21 +38,18 @@ public class InboxFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     DatabaseHelper mDatabaseHelper;
-    private ListView mListView;
     MyAdapter adapter;
 
     @Override
     public void onStart(){
         super.onStart();
 
-        mDatabaseHelper = mDatabaseHelper.getInstance(getActivity());
+        ListView mListView;
+
+        mDatabaseHelper = DatabaseHelper.getInstance(getActivity());
         mListView = (ListView) getActivity().findViewById(R.id.listView);
 
         final ArrayList<Task> tasks = new ArrayList<>();
@@ -94,7 +88,6 @@ public class InboxFragment extends Fragment {
                 for(int i=0;i<positionList.length;i++) {
                     SwipeDirection direction = directionList[i];
                     int position = positionList[i];
-                    String dir = "";
 
                     if (direction == SwipeDirection.DIRECTION_FAR_LEFT) {
                         mDatabaseHelper.deleteTask(tasks.get(position).getId());
@@ -115,9 +108,9 @@ public class InboxFragment extends Fragment {
     }
 
 
-    private void toastMessage(String message){
-        Toast.makeText(getActivity(),message, Toast.LENGTH_SHORT).show();
-    }
+//    private void toastMessage(String message){
+//        Toast.makeText(getActivity(),message, Toast.LENGTH_SHORT).show();
+//    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

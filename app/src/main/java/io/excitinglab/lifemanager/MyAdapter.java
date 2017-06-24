@@ -13,13 +13,9 @@ import android.widget.Toast;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 
 import static java.sql.Types.NULL;
-
-
-/**
- * Created by Alex on 14.05.2017.
- */
 
 public class MyAdapter extends BaseAdapter {
 
@@ -30,7 +26,7 @@ public class MyAdapter extends BaseAdapter {
 
     Context context;
     ArrayList<Task> tasks;
-    ArrayList<Boolean> checkedState;
+//    ArrayList<Boolean> checkedState;
     private static LayoutInflater inflater = null;
 
     public MyAdapter(Context context, ArrayList<Task> tasks) {
@@ -68,7 +64,7 @@ public class MyAdapter extends BaseAdapter {
             vi = inflater.inflate(R.layout.row, parent,false);
 
 
-        mDatabaseHelper = mDatabaseHelper.getInstance(context);
+        mDatabaseHelper = DatabaseHelper.getInstance(context);
 
 
         vi.setOnClickListener(new View.OnClickListener() {
@@ -135,10 +131,10 @@ public class MyAdapter extends BaseAdapter {
 
 
         String dateString="";
-        String timeString="";
+//        String timeString="";
         if (tasks.get(position).getDeadline()!=NULL) {
             Date datetime=new Date(tasks.get(position).getDeadline());
-            SimpleDateFormat sdf1=new SimpleDateFormat("EEE, d MMM");
+            SimpleDateFormat sdf1=new SimpleDateFormat("EEE, d MMM", Locale.getDefault());
 //            SimpleDateFormat sdf1=new SimpleDateFormat("EEE");
             dateString=sdf1.format(datetime);
 
@@ -167,9 +163,9 @@ public class MyAdapter extends BaseAdapter {
     }
 
 
-    private void toastMessage(String message){
-        Toast.makeText(context,message, Toast.LENGTH_SHORT).show();
-    }
+//    private void toastMessage(String message){
+//        Toast.makeText(context,message, Toast.LENGTH_SHORT).show();
+//    }
 
 }
 

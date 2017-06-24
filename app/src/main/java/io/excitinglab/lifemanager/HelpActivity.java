@@ -25,7 +25,7 @@ public class HelpActivity extends AppCompatActivity {
     private TextView[] dots;
     private int[] layouts;
     private Button btnSkip, btnNext;
-    private PrefManager prefManager;
+//    private PrefManager prefManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

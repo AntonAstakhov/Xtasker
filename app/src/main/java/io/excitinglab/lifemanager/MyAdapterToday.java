@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.support.v4.content.ContextCompat;
+import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,19 +18,15 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 import static java.sql.Types.NULL;
-
-
-/**
- * Created by Alex on 14.05.2017.
- */
 
 public class MyAdapterToday extends BaseAdapter {
 
 
     DatabaseHelper mDatabaseHelper;
-    CheckBox checkBox;
+//    CheckBox checkBox;
 
 
     Context context;
@@ -67,10 +64,7 @@ public class MyAdapterToday extends BaseAdapter {
         if (vi == null)
             vi = inflater.inflate(R.layout.row, parent,false);
 
-        mDatabaseHelper = mDatabaseHelper.getInstance(context);
-
-
-
+        mDatabaseHelper = DatabaseHelper.getInstance(context);
 
         vi.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,8 +75,6 @@ public class MyAdapterToday extends BaseAdapter {
                 context.startActivity(intent);
             }
         });
-
-
 
         final TextView text1 = (TextView) vi.findViewById(R.id.tv_header);
         TextView text2 = (TextView) vi.findViewById(R.id.tv_list);
@@ -125,10 +117,15 @@ public class MyAdapterToday extends BaseAdapter {
         Date d = new Date (tasks.get(position).getDeadline());
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(nowDate);
-        calendar.add(Calendar.DATE, -1);
+//        calendar.add(Calendar.DATE, -1);
         nowDate = calendar.getTime();
 //        ImageView img3=(ImageView) vi.findViewById(R.id.img_attention);
-        if (d.before(nowDate)) {
+
+        if (DateUtils.isToday(tasks.get(position).getDeadline())) {
+            // do nothing
+        }
+
+        else if (d.before(nowDate)) {
 
 //            img3.setVisibility(View.VISIBLE);
 //            text1.setTextColor(Color.parseColor("#FF0000"));
@@ -138,24 +135,24 @@ public class MyAdapterToday extends BaseAdapter {
             img1.setColorFilter(ContextCompat.getColor(context,R.color.red_accent200));
             text3.setTextColor(Color.parseColor("#FF0000"));
         }
-        else {
-//            img3.setVisibility(View.INVISIBLE);
-//            text1.setTypeface(null, Typeface.NORMAL);
-        }
+//        else {
+////            img3.setVisibility(View.INVISIBLE);
+////            text1.setTypeface(null, Typeface.NORMAL);
+//        }
 
         if (tasks.get(position).getP_id() == 0) {
-            text2.setText("Inbox");
+            text2.setText(R.string.Inbox);
         }
         else {
             text2.setText(mDatabaseHelper.getListByID(tasks.get(position).getP_id()).getName());
         }
 
         String dateString="";
-        String timeString="";
+//        String timeString="";
         if (tasks.get(position).getDeadline()!=NULL) {
             Date datetime=new Date(tasks.get(position).getDeadline());
 //            SimpleDateFormat sdf1=new SimpleDateFormat("EEE, d MMM");
-            SimpleDateFormat sdf1=new SimpleDateFormat("EEE, d MMM");
+            SimpleDateFormat sdf1=new SimpleDateFormat("EEE, d MMM", Locale.getDefault());
             dateString=sdf1.format(datetime);
         }
         else {
@@ -181,9 +178,9 @@ public class MyAdapterToday extends BaseAdapter {
     }
 
 
-    private void toastMessage(String message){
-        Toast.makeText(context,message, Toast.LENGTH_SHORT).show();
-    }
+//    private void toastMessage(String message){
+//        Toast.makeText(context,message, Toast.LENGTH_SHORT).show();
+//    }
 
 }
 

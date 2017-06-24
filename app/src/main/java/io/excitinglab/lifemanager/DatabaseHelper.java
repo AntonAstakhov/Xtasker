@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.os.Build;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,17 +23,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         return sInstance;
     }
-
-
-//    Todo: FIGURE OUT WHETHER TO DELETE DB-INSTANCE OR NOT
-
-//    public void finalize() throws Throwable {
-//        if(null != sInstance)
-//            sInstance.close();
-//        super.finalize();
-//    }
-
-    private static final String LOG = DatabaseHelper.class.getName();
 
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "TaskManager.db";
@@ -100,13 +88,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-    public void closeDB() {
-        SQLiteDatabase db = this.getReadableDatabase();
-        if (db != null && db.isOpen())
-            db.close();
-    }
-
-
     // ------------------------ "lists" table methods ----------------//
 
     public int createList(Lists list) {
@@ -125,8 +106,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         if (list_id == -1) {
             return -1;
-        } else {
-
         }
 
 //        Log.e("SORT: ", String.valueOf(list.getSort()));
@@ -312,8 +291,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     // ------------------------ "tasks" table methods ----------------//
 
-//    Todo: ADD METHODS TO GET ALL TASKS SORTED
-
 
     public long createTask(Task task, int list_id) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -349,23 +326,26 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
         Task t = new Task();
-        t.setId(c.getInt(c.getColumnIndex(TASK_ID)));
-        t.setCreate(c.getLong(c.getColumnIndex(TASK_CREATION)));
-        t.setName(c.getString(c.getColumnIndex(TASK_NAME)));
-        t.setStatus(c.getInt(c.getColumnIndex(TASK_STATUS)));
-        t.setDeadline(c.getLong(c.getColumnIndex(TASK_DEADLINE)));
-        t.setReminder(c.getLong(c.getColumnIndex(TASK_REMINDER)));
-        t.setNote(c.getString(c.getColumnIndex(TASK_NOTE)));
-        t.setP_id(c.getInt(c.getColumnIndex(TASK_P_ID)));
+        if (c != null) {
+            t.setId(c.getInt(c.getColumnIndex(TASK_ID)));
+            t.setCreate(c.getLong(c.getColumnIndex(TASK_CREATION)));
+            t.setName(c.getString(c.getColumnIndex(TASK_NAME)));
+            t.setStatus(c.getInt(c.getColumnIndex(TASK_STATUS)));
+            t.setDeadline(c.getLong(c.getColumnIndex(TASK_DEADLINE)));
+            t.setReminder(c.getLong(c.getColumnIndex(TASK_REMINDER)));
+            t.setNote(c.getString(c.getColumnIndex(TASK_NOTE)));
+            t.setP_id(c.getInt(c.getColumnIndex(TASK_P_ID)));
 
-        c.close();
+            c.close();
+        }
+
         db.close();
 
         return t;
     }
 
     public List<Task> getAllTasks(Lists list) {
-        List<Task> tasks = new ArrayList<Task>();
+        List<Task> tasks = new ArrayList<>();
 
         String selectQuery = "SELECT " +
                 TABLE_TASKS + "." + TASK_ID + ", " +
@@ -412,7 +392,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
     public List<Task> getAllTasks() {
-        List<Task> tasks = new ArrayList<Task>();
+        List<Task> tasks = new ArrayList<>();
 
         String selectQuery = "SELECT * FROM " + TABLE_TASKS;
 
@@ -447,7 +427,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public List<Task> getActiveTasks(Lists list) {
-        List<Task> tasks = new ArrayList<Task>();
+        List<Task> tasks = new ArrayList<>();
 
         String selectQuery = "SELECT " +
                 TABLE_TASKS + "." + TASK_ID + ", " +
@@ -498,8 +478,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         List<Task> tasks = new ArrayList<>();
         String selectQuery = "";
-        String ascdesc = "";
-        int listSort = 0;
+        String ascdesc;
 
         if (sort == 0 || sort == 1) {
             if (list.getSort() == 0) ascdesc = " ASC";
@@ -604,7 +583,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         List<Task> tasks = new ArrayList<>();
         String selectQuery = "";
         String ascdesc = "";
-        int listSort = 0;
 
 //        Log.e("LIST_SORT: ", String.valueOf(list.getSort()));
 
@@ -705,7 +683,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
     public List<Task> getUnactiveTasks(Lists list) {
-        List<Task> tasks = new ArrayList<Task>();
+        List<Task> tasks = new ArrayList<>();
 
         String selectQuery = "SELECT " +
                 TABLE_TASKS + "." + TASK_ID + ", " +
@@ -753,7 +731,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
     public List<Task> getAllTasksFromInbox() {
-        List<Task> tasks = new ArrayList<Task>();
+        List<Task> tasks = new ArrayList<>();
 
         String selectQuery = "SELECT " +
                 TABLE_TASKS + "." + TASK_ID + ", " +
@@ -796,7 +774,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
     public List<Task> getActiveTasksFromInbox() {
-        List<Task> tasks = new ArrayList<Task>();
+        List<Task> tasks = new ArrayList<>();
 
         String selectQuery = "SELECT " +
                 TABLE_TASKS + "." + TASK_ID + ", " +
@@ -839,36 +817,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-
-
-
     public List<Task> getAllTasksForToday() {
         List<Task> tasks = new ArrayList<>();
-
-//        Calendar now = Calendar.getInstance();
-//        long time = new java.util.Date().getTime();
-
 
         String selectQuery = "SELECT * FROM " + TABLE_TASKS +
                 " WHERE " + TASK_STATUS + " = 0" +
                 " ORDER BY " + TASK_DEADLINE + " ASC";
-
-//        String selectQuery = "SELECT " +
-//                TABLE_TASKS + "." + TASK_ID + ", " +
-//                TABLE_TASKS + "." + TASK_CREATION + ", " +
-//                TABLE_TASKS + "." + TASK_NAME + ", " +
-//                TABLE_TASKS + "." + TASK_STATUS + ", " +
-//                TABLE_TASKS + "." + TASK_DEADLINE + ", " +
-//                TABLE_TASKS + "." + TASK_REMINDER + ", " +
-//                TABLE_TASKS + "." + TASK_NOTE + ", " +
-//                TABLE_TASKS + "." + TASK_P_ID +
-//                " FROM " + TABLE_TASKS + " JOIN " + TABLE_LISTS + " ON " +
-//                TABLE_TASKS + "." + TASK_P_ID + " = " + TABLE_LISTS + "." + LIST_ID +
-//                " WHERE " + TABLE_TASKS + "." + TASK_P_ID + " = " + list.getId() +
-//                " AND " + TABLE_TASKS + "." + TASK_STATUS + " = 0" +
-//                " AND " + TABLE_TASKS + "." + TASK_DEADLINE + " <= " + now.get(Calendar.DATE);
-
-//        Log.e(LOG, selectQuery);
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c = db.rawQuery(selectQuery, null);
@@ -884,9 +838,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 t.setReminder(c.getLong(c.getColumnIndex(TASK_REMINDER)));
                 t.setNote(c.getString(c.getColumnIndex(TASK_NOTE)));
                 t.setP_id(c.getInt(c.getColumnIndex(TASK_P_ID)));
-
-
-//                Log.d("SPECIFIC_LIST_TASKS: ", t.getName() + "; p_id:" + t.getP_id() + "; list_id:" + list.getId());
 
                 tasks.add(t);
             } while (c.moveToNext());
@@ -922,9 +873,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 t.setNote(c.getString(c.getColumnIndex(TASK_NOTE)));
                 t.setP_id(c.getInt(c.getColumnIndex(TASK_P_ID)));
 
-
-//                Log.d("SPECIFIC_LIST_TASKS: ", t.getName() + "; p_id:" + t.getP_id() + "; list_id:" + list.getId());
-
                 tasks.add(t);
             } while (c.moveToNext());
         }
@@ -938,16 +886,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public int updateTask(Task task) {
 
-
-
-//        Log.e ("VERY NEW: ", String.valueOf(task.getId()));
-
-
         long reminderOld = getTask((int) task.getId()).getReminder();
         long reminderNew = task.getReminder();
-
-//        Log.e("BEFORE REM: ", String.valueOf(reminderOld));
-//        Log.e("AFTER REM: ", String.valueOf(reminderNew));
 
         if (reminderOld == reminderNew) {
             // do nothing
@@ -955,8 +895,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         else if (reminderOld != 0) {
             // cancel old alarm
             AlarmManager mgr = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-            Intent stopIntent = new Intent(MainActivity.getAppContext(), Alarm.class);
-            PendingIntent stopPI = PendingIntent.getBroadcast(MainActivity.getAppContext(), (int) task.getId(), stopIntent, 0);
+            Intent stopIntent = new Intent(context.getApplicationContext(), Alarm.class);
+            PendingIntent stopPI = PendingIntent.getBroadcast(context.getApplicationContext(), (int) task.getId(), stopIntent, 0);
             mgr.cancel(stopPI);
         }
 
@@ -964,27 +904,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             // add new alarm
             Intent intent2 = new Intent(context, Alarm.class);
             intent2.putExtra("Title", task.getName());
-            intent2.putExtra("List", task.getP_id());
+            if (getListByID(task.getP_id()).getId() == 0) {
+                intent2.putExtra("List", "Inbox");
+            }
+            else {
+                intent2.putExtra("List", getListByID(task.getP_id()).getName());
+            }
+            intent2.putExtra("ID", (int) task.getId());
             PendingIntent pendingIntent = PendingIntent.getBroadcast(context, (int) task.getId(), intent2, PendingIntent.FLAG_UPDATE_CURRENT);
 
             AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 
-            if (Build.VERSION.SDK_INT < 19) {
-                am.set(AlarmManager.RTC_WAKEUP, reminderNew, pendingIntent);
-            } else {
-                am.setExact(AlarmManager.RTC_WAKEUP, reminderNew, pendingIntent);
-            }
+            am.setExact(AlarmManager.RTC_WAKEUP, reminderNew, pendingIntent);
         }
-
-
-//        if (task.getReminder() != 0) {
-////            Log.e ("REMINDER: ", String.valueOf(task.getReminder()));
-//            AlarmManager mgr = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-//            Intent stopIntent = new Intent(MainActivity.getAppContext(), Alarm.class);
-//            PendingIntent stopPI = PendingIntent.getBroadcast(MainActivity.getAppContext(), (int) task.getId(), stopIntent, 0);
-//            mgr.cancel(stopPI);
-//        }
-
 
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -998,10 +930,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(TASK_NOTE, task.getNote());
         values.put(TASK_P_ID, task.getP_id());
 
-//        Log.e("OLD: ", String.valueOf(getTask((int) task.getId())));
-//        Log.e("NEW: ", String.valueOf(task.getReminder()));
-
-
         int i = db.update(TABLE_TASKS, values, TASK_ID + " = ?",
                 new String[] { String.valueOf(task.getId()) });
 
@@ -1010,22 +938,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return i;
     }
 
-//    private void deleteReminder(Task task) {
-//        if (task.getReminder() != 0) {
-////            Log.e ("REMINDER: ", String.valueOf(task.getReminder()));
-//            AlarmManager mgr = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-//            Intent stopIntent = new Intent(MainActivity.getAppContext(), Alarm.class);
-//            PendingIntent stopPI = PendingIntent.getBroadcast(MainActivity.getAppContext(), (int) task.getId(), stopIntent, 0);
-//            mgr.cancel(stopPI);
-//        }
-//    }
 
     public int completeTask(Task task) {
 
         if (task.getReminder() != 0) {
             AlarmManager mgr = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-            Intent stopIntent = new Intent(MainActivity.getAppContext(), Alarm.class);
-            PendingIntent stopPI = PendingIntent.getBroadcast(MainActivity.getAppContext(), (int) task.getId(), stopIntent, 0);
+            Intent stopIntent = new Intent(context.getApplicationContext(), Alarm.class);
+            PendingIntent stopPI = PendingIntent.getBroadcast(context.getApplicationContext(), (int) task.getId(), stopIntent, 0);
             mgr.cancel(stopPI);
         }
 
@@ -1078,8 +997,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         if (getTask((int) task_id).getReminder() != 0) {
             AlarmManager mgr = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-            Intent stopIntent = new Intent(MainActivity.getAppContext(), Alarm.class);
-            PendingIntent stopPI = PendingIntent.getBroadcast(MainActivity.getAppContext(), (int) task_id, stopIntent, 0);
+            Intent stopIntent = new Intent(context.getApplicationContext(), Alarm.class);
+            PendingIntent stopPI = PendingIntent.getBroadcast(context.getApplicationContext(), (int) task_id, stopIntent, 0);
             mgr.cancel(stopPI);
         }
 

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -71,22 +72,21 @@ public class TodayFragment extends Fragment {
 
 
     DatabaseHelper mDatabaseHelper;
-    private ListView mListView;
     MyAdapterToday adapter;
 
     @Override
     public void onStart(){
         super.onStart();
 
-        mDatabaseHelper = mDatabaseHelper.getInstance(getActivity());
-        mListView = (ListView) getActivity().findViewById(R.id.listView);
+        mDatabaseHelper = DatabaseHelper.getInstance(getActivity());
+        ListView mListView = (ListView) getActivity().findViewById(R.id.listView);
 
         final ArrayList<Task> tasks = new ArrayList<>();
         tasks.addAll(mDatabaseHelper.getAllTasksForToday());
 
-        Date nowDate = new Date (new java.util.Date().getTime());
+//        Date nowDate = new Date (new java.util.Date().getTime());
         for (int i = 0; i < tasks.size(); i++) {
-            Date datetime = new Date (tasks.get(i).getDeadline());
+//            Date datetime = new Date (tasks.get(i).getDeadline());
 
             if (tasks.get(i).getDeadline() == 0) {
                 tasks.remove(i);
@@ -94,7 +94,7 @@ public class TodayFragment extends Fragment {
                 continue;
             }
 
-            if (datetime.after(nowDate)) {
+            if (!DateUtils.isToday(tasks.get(i).getDeadline())) {
                 tasks.remove(i);
                 i--;
             }
@@ -132,7 +132,7 @@ public class TodayFragment extends Fragment {
                 for(int i=0;i<positionList.length;i++) {
                     SwipeDirection direction = directionList[i];
                     int position = positionList[i];
-                    String dir = "";
+//                    String dir = "";
 
                     if (direction == SwipeDirection.DIRECTION_FAR_LEFT) {
                         mDatabaseHelper.deleteTask(tasks.get(position).getId());

@@ -20,8 +20,7 @@ public class ListViewFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    private String mParam1;
-    private int mParam2;
+//    private static final String ARG_PARAM2 = "param2";
 
     private OnFragmentInteractionListener mListener;
 
@@ -29,14 +28,12 @@ public class ListViewFragment extends Fragment {
 
     }
 
-    public static ListViewFragment newInstance(int param2) {
+    public static ListViewFragment newInstance(String param1, String param2) {
         ListViewFragment fragment = new ListViewFragment();
         Bundle args = new Bundle();
-//        args.putString(ARG_PARAM1, param1);
-        args.putInt(ARG_PARAM2, param2);
-
-//        selectedID = param2;
-
+//        args.putInt(ARG_PARAM2, param2);
+        args.putString(ARG_PARAM1, param1);
+        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -46,16 +43,10 @@ public class ListViewFragment extends Fragment {
     private int SORTLIST = -1;
 
     DatabaseHelper mDatabaseHelper;
-    private ListView mListView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-//            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getInt(ARG_PARAM2);
-//            selectedID = mParam2;
-        }
     }
 
     MyAdapter adapter;
@@ -67,7 +58,9 @@ public class ListViewFragment extends Fragment {
     public void onStart(){
         super.onStart();
 
-        mDatabaseHelper = mDatabaseHelper.getInstance(getActivity());
+        ListView mListView;
+
+        mDatabaseHelper = DatabaseHelper.getInstance(getActivity());
         mListView = (ListView) getActivity().findViewById(R.id.listView);
 
         Lists list = mDatabaseHelper.getListByID(selectedID);
@@ -122,28 +115,8 @@ public class ListViewFragment extends Fragment {
                 for(int i=0;i<positionList.length;i++) {
                     SwipeDirection direction = directionList[i];
                     final int position = positionList[i];
-                    String dir = "";
 
                     if (direction == SwipeDirection.DIRECTION_FAR_LEFT) {
-
-//                        new AlertDialog.Builder(getActivity())
-//                                .setTitle("Delete task")
-//                                .setMessage("Are you sure you want to delete this task?")
-//                                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-//                                    public void onClick(DialogInterface dialog, int which) {
-//                                        mDatabaseHelper.deleteTask(tasks.get(position).getId());
-//                                        tasks.remove(position);
-//                                        if (position < s) s--;
-//                                    }
-//                                })
-//                                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-//                                    public void onClick(DialogInterface dialog, int which) {
-//                                    }
-//                                })
-//                                .setIcon(android.R.drawable.ic_dialog_alert)
-//                                .show();
-
-
                         mDatabaseHelper.deleteTask(tasks.get(position).getId());
                         tasks.remove(position);
                         if (position < s) s--;
@@ -152,9 +125,7 @@ public class ListViewFragment extends Fragment {
 
                     if (direction == SwipeDirection.DIRECTION_FAR_RIGHT) {
                         if (SHOW_COMPLETED) {
-//                            Log.e("hey!", "it starts here");
                             if (position >= s) {
-//                                Log.e("HEY!", "IT WORKED!!!");
                                 mDatabaseHelper.returnTask(tasks.get(position));
                                 onStart();
                             }
@@ -170,20 +141,17 @@ public class ListViewFragment extends Fragment {
                             s--;
                         }
                     }
-//                    onStart();
                     adapter1.notifyDataSetChanged();
                     adapter.notifyDataSetChanged();
                 }
-//                adapter1.notifyDataSetChanged();
-//                adapter.notifyDataSetChanged();
             }
         });
     }
 
 
-    private void toastMessage(String message){
-        Toast.makeText(getActivity(),message, Toast.LENGTH_SHORT).show();
-    }
+//    private void toastMessage(String message){
+//        Toast.makeText(getActivity(),message, Toast.LENGTH_SHORT).show();
+//    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

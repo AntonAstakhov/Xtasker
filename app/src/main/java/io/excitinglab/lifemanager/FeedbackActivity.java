@@ -3,6 +3,7 @@ package io.excitinglab.lifemanager;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,7 +15,7 @@ public class FeedbackActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feedback);
 
-        getSupportActionBar().setTitle("Send feedback");
+        if (getSupportActionBar() != null) getSupportActionBar().setTitle("Send feedback");
 
         final EditText textIssue = (EditText) findViewById(R.id.textIssue);
         final EditText textNotes = (EditText) findViewById(R.id.textNotes);
@@ -36,5 +37,17 @@ public class FeedbackActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == android.R.id.home) {
+            finish();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }
